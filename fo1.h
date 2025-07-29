@@ -1,9 +1,5 @@
 #include <d3d9.h>
 
-#include "scriptenums.h"
-#include "languages.h"
-#include "fo1math.h"
-
 #include "types/FO2String.h"
 #include "types/FO2Vector.h"
 #include "types/LUA.h"

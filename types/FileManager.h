@@ -31,9 +31,49 @@ public:
 
 class File {
 public:
-	uint8_t _0[0x20];
+	FO2String sPath; // +0
+	uint32_t nFlags; // +1C
 	FileCodec* pFileCodec; // +20
+	bool bLoaded; // +24
+
+	static inline uintptr_t ctor_jmp = 0x4EEF10;
+	void __attribute__((naked)) __thiscall ctor() {
+		__asm__ (
+			"mov esi, ecx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (ctor_jmp)
+		);
+	}
+
+	static inline uintptr_t dtor_jmp = 0x4EF110;
+	void __attribute__((naked)) __thiscall dtor() {
+		__asm__ (
+			"mov esi, ecx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (dtor_jmp)
+		);
+	}
+
+	static inline uintptr_t Load_jmp = 0x4EEFF0;
+	bool __attribute__((naked)) __thiscall Load(const char* path, int args) {
+		__asm__ (
+			"mov esi, ecx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (Load_jmp)
+		);
+	}
+
+	File() {
+		ctor();
+	}
+	~File() {
+		dtor();
+	}
 };
+static_assert(sizeof(File) == 0x28);
 
 uintptr_t ParseGameDDS_jmp = 0x509FE0;
 bool __attribute__((naked)) __fastcall ParseGameDDS(uint8_t* header, void*, DevTexture* pThis, File* pFile) {
@@ -46,7 +86,7 @@ bool __attribute__((naked)) __fastcall ParseGameDDS(uint8_t* header, void*, DevT
 }
 
 uintptr_t ParseGameDDS2_jmp = 0x50A5C0;
-bool __attribute__((naked)) __fastcall ParseGameDDS2(uint8_t* header, void*, DevTexture* pThis, uint8_t* pFile) {
+bool __attribute__((naked)) __fastcall ParseGameDDSFromMemory(uint8_t* header, void*, DevTexture* pThis, uint8_t* pFile) {
 	__asm__ (
 		"mov eax, ecx\n\t"
 		"jmp %0\n\t"
