@@ -18,7 +18,7 @@ public:
 	static inline auto CreateTextureFromFile = (DevTexture*(__thiscall*)(DeviceD3d*, DevTexture*, const char* path, uint32_t flags))0x50B060;
 	static inline auto CreateTextureFromMemory = (DevTexture*(__thiscall*)(DeviceD3d*, DevTexture*, uint8_t* data, uint32_t dataSize, uint32_t flags))0x50B410;
 
-	/*virtual void _vf0() = 0;
+	virtual void _vf0() = 0;
 	virtual void _vf1() = 0;
 	virtual void _vf2() = 0;
 	virtual void _vf3() = 0;
@@ -79,15 +79,15 @@ public:
 	virtual void _vf58() = 0;
 	virtual void _vf59() = 0;
 	virtual void _vf60() = 0;
-	virtual DevTexture* CreateTextureFromFile(DevTexture* pTexture, const char* path, uint32_t flags) = 0;
-	virtual DevTexture* CreateTextureFromMemory(DevTexture* pTexture, uint8_t* data, uint32_t dataSize, uint32_t flags) = 0;
+	virtual DevTexture* _vf_CreateTextureFromFile(DevTexture* pTexture, const char* path, uint32_t flags) = 0;
+	virtual DevTexture* _vf_CreateTextureFromMemory(DevTexture* pTexture, uint8_t* data, uint32_t dataSize, uint32_t flags) = 0;
 	virtual void _vf63() = 0;
 	virtual void _vf64() = 0;
 	virtual void _vf65() = 0;
 	virtual void _vf66() = 0;
 	virtual void _vf67() = 0;
 	virtual void _vf68() = 0;
-	virtual void _vf69() = 0;*/
+	virtual void _vf69() = 0;
 };
 auto& pDeviceD3d = *(DeviceD3d**)0x6C0098;
 
