@@ -7,8 +7,14 @@ public:
 
 class MenuInterface {
 public:
-	uint8_t _0[0x50];
+	uint8_t _0[0x18];
+	float fMenuTimer; // +18
+	uint8_t _1C[0x34];
 	MenuScene* pMenuScene; // +50
+	uint8_t _54[0x1DC];
+	uint32_t bMusicPopupFinished; // +230
+	uint32_t bMusicPopupActive; // +234
+	uint32_t nMusicPopupTimer; // +238
 };
 
 class PlayerHost {

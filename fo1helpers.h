@@ -17,3 +17,15 @@ int GetNumSkinsForCar(int carId) {
 	}
 	return i;
 }
+
+enum eGameState {
+	GAME_STATE_NONE,
+	GAME_STATE_MENU,
+	GAME_STATE_RACE
+};
+
+int GetGameState() {
+	if (pGameFlow->pMenuInterface) return GAME_STATE_MENU;
+	if (pPlayerHost) return GAME_STATE_RACE;
+	return GAME_STATE_NONE;
+}
