@@ -29,3 +29,8 @@ int GetGameState() {
 	if (pPlayerHost) return GAME_STATE_RACE;
 	return GAME_STATE_NONE;
 }
+
+NyaDrawing::CNyaRGBA32 GetPaletteColor(int id) {
+	auto col = *(NyaDrawing::CNyaRGBA32*)&gPalette[id];
+	return {col.b, col.g, col.r, 255};
+}

@@ -30,5 +30,7 @@ public:
 	PlayerHost* pHost; // +2828
 	uint8_t _282C[0xC4];
 	MenuInterface* pMenuInterface; // +28F0
+	uint8_t _28F4[0x40];
+	uint32_t nSaveSlot; // +2934
 };
 auto& pGameFlow = *(GameFlow**)0x6A7CE0;
