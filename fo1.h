@@ -15,6 +15,7 @@ auto& pLoadingScreen = *(void**)0x6C0050;
 
 auto gPalette = (uint32_t*)0x6C44E8;
 
+auto& nInterfaceMusicVolume = *(int*)0x6C02E0;
 auto& nIngameMusicVolume = *(int*)0x6C02E8;
 
 auto& nMusicPopupTimeOffset = *(int*)0x6BFFEC;
