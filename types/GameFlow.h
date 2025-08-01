@@ -24,6 +24,10 @@ public:
 	FO2Vector<Player*> aLocalPlayers; // +20
 	uint8_t _2C[0x1E220];
 	uint32_t nRaceTime; // +1E24C
+
+	int GetNumPlayers() {
+		return aPlayers.GetSize();
+	}
 };
 auto& pPlayerHost = *(PlayerHost**)0x68B7C0;
 
@@ -33,7 +37,9 @@ public:
 	uint32_t nCarType; // +78
 	uint32_t nCarClass; // +7C
 	uint32_t nCarSkin; // +80
-	uint8_t _84[0x94];
+	uint8_t _84[0x10];
+	uint32_t nEasyDifficulty; // +94
+	uint8_t _98[0x80];
 	uint8_t aCarUpgrades[40]; // +118
 	uint32_t nNumCarUpgrades; // +140
 	uint8_t _144[0x20C4];
@@ -48,12 +54,12 @@ public:
 	uint32_t nClass; // +134
 	uint32_t nCar; // +138
 	uint8_t _13C[0x8];
-	uint32_t nGameMode; // +144
+	eGameMode nGameMode; // +144
 	uint32_t nIsCareerMode; // +148
 	uint8_t _14C[0x4];
 	uint32_t nAutoTransmission; // +150
-	uint32_t nEventType; // +154
-	uint32_t nSubEventType; // +158
+	eEventType nEventType; // +154
+	eSubEventType nSubEventType; // +158
 	uint8_t _15C[0x49C];
 	PlayerProfile Profile; // +5F8
 	uint8_t _2800[0x28];

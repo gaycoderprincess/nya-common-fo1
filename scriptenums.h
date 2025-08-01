@@ -49,20 +49,20 @@ enum eTrack {
 	TRACK_CLOWN = 49,
 };
 
-enum class eGameMode {
+enum class eGameMode : uint32_t {
 	SINGLEPLAYER = 1,
 	HOST = 2,
 	JOIN = 3,
 	SPLITSCREEN = 4,
 };
 
-enum class eEventType {
+enum class eEventType : uint32_t {
 	RACE,
 	DERBY,
 	STUNT,
 };
 
-enum class eSubEventType {
+enum class eSubEventType : uint32_t {
 	NONE,
 	RACE_NORMAL,
 	RACE_CAREER,
