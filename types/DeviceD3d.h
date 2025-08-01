@@ -93,3 +93,5 @@ auto& pDeviceD3d = *(DeviceD3d**)0x6C0098;
 
 auto& nGameResolutionX = *(int*)0x6B0D88;
 auto& nGameResolutionY = *(int*)0x6B0D8C;
+
+auto LoadTextureFromFile = (DevTexture*(__stdcall*)(void*, const char* path, int, int))0x4EFE40;

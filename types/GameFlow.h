@@ -44,7 +44,8 @@ class GameFlow {
 public:
 	uint8_t _0[0x20];
 	uint32_t nLevel; // +20
-	uint8_t _24[0x114];
+	uint8_t _24[0x110];
+	uint32_t nClass; // +134
 	uint32_t nCar; // +138
 	uint8_t _13C[0x8];
 	uint32_t nGameMode; // +144
