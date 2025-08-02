@@ -39,7 +39,9 @@ public:
 	uint32_t nCarSkin; // +80
 	uint8_t _84[0x10];
 	uint32_t nEasyDifficulty; // +94
-	uint8_t _98[0x80];
+	uint8_t _98[0xC];
+	uint32_t nAutosaveSlot; // +A4
+	uint8_t _A8[0x70];
 	uint8_t aCarUpgrades[40]; // +118
 	uint32_t nNumCarUpgrades; // +140
 	uint8_t _144[0x20C4];
@@ -67,7 +69,7 @@ public:
 	uint8_t _282C[0xC4];
 	MenuInterface* pMenuInterface; // +28F0
 	uint8_t _28F4[0x40];
-	uint32_t nSaveSlot; // +2934
+	int32_t nSaveSlot; // +2934
 };
 auto& pGameFlow = *(GameFlow**)0x6A7CE0;
 
