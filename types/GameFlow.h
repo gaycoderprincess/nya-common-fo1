@@ -33,13 +33,16 @@ auto& pPlayerHost = *(PlayerHost**)0x68B7C0;
 
 class PlayerProfile {
 public:
-	uint8_t _0[0x78];
+	uint8_t _0[0x52];
+	wchar_t wsPlayerName[16]; // +52
+	uint8_t _72[0x6];
 	uint32_t nCarType; // +78
 	uint32_t nCarClass; // +7C
 	uint32_t nCarSkin; // +80
 	uint8_t _84[0x10];
 	uint32_t nEasyDifficulty; // +94
-	uint8_t _98[0xC];
+	uint32_t nCurrentClass; // +98
+	uint8_t _9C[0x8];
 	uint32_t nAutosaveSlot; // +A4
 	uint8_t _A8[0x70];
 	uint8_t aCarUpgrades[40]; // +118

@@ -34,3 +34,85 @@ NyaDrawing::CNyaRGBA32 GetPaletteColor(int id) {
 	auto col = *(NyaDrawing::CNyaRGBA32*)&gPalette[id];
 	return {col.b, col.g, col.r, 255};
 }
+
+bool DoesTrackExist(int id) {
+	auto lua = pScriptHost->pLUAStruct->pLUAContext;
+	auto oldtop = lua_gettop(lua);
+
+	lua_getfield(lua, -10001, "Levels");
+	lua_rawgeti(lua, lua_gettop(lua), id);
+	auto value = lua_type(lua, lua_gettop(lua));
+	lua_settop(lua, oldtop);
+	return value;
+}
+
+int GetNumTracks() {
+	int i = 0;
+	while (DoesTrackExist(i+1)) {
+		i++;
+	}
+	return i;
+}
+
+bool DoesTrackValueExist(int id, const char* name) {
+	if (!DoesTrackExist(id)) return false;
+
+	auto lua = pScriptHost->pLUAStruct->pLUAContext;
+	auto oldtop = lua_gettop(lua);
+
+	lua_getfield(lua, -10001, "Levels");
+	lua_rawgeti(lua, lua_gettop(lua), id);
+
+	auto oldtop2 = lua_gettop(lua);
+	lua_setglobal(lua, name);
+	lua_gettable(lua, oldtop2);
+	auto value = lua_type(lua, lua_gettop(lua));
+	lua_settop(lua, oldtop);
+	return value;
+}
+
+float GetTrackValueNumber(int id, const char* name) {
+	if (!DoesTrackValueExist(id, name)) return 0;
+
+	auto lua = pScriptHost->pLUAStruct->pLUAContext;
+	auto oldtop = lua_gettop(lua);
+
+	lua_getfield(lua, -10001, "Levels");
+	lua_rawgeti(lua, lua_gettop(lua), id);
+
+	auto oldtop2 = lua_gettop(lua);
+	lua_setglobal(lua, name);
+	lua_gettable(lua, oldtop2);
+	auto f = luaL_checknumber(lua, lua_gettop(lua));
+
+	lua_settop(lua, oldtop);
+
+	return f;
+}
+
+std::string GetTrackValueString(int id, const char* name) {
+	if (!DoesTrackValueExist(id, name)) return "";
+
+	auto lua = pScriptHost->pLUAStruct->pLUAContext;
+	auto oldtop = lua_gettop(lua);
+
+	lua_getfield(lua, -10001, "Levels");
+	lua_rawgeti(lua, lua_gettop(lua), id);
+
+	auto oldtop2 = lua_gettop(lua);
+	lua_setglobal(lua, name);
+	lua_gettable(lua, oldtop2);
+	std::string str = (const char*)lua_tolstring(lua, lua_gettop(lua));
+
+	lua_settop(lua, oldtop);
+
+	return str;
+}
+
+std::string GetTrackName(int id) {
+	return GetTrackValueString(id, "Name");
+}
+
+std::string GetTrackDescription(int id) {
+	return GetTrackValueString(id, "Description");
+}

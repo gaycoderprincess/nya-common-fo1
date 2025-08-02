@@ -9,10 +9,10 @@ public:
 		void* pLUAContext; // +4
 	};
 
-	uint8_t _0[0x8];
+	uint8_t _0[0x4];
 	tLUAStruct* pLUAStruct;
 };
-auto& pScriptHost = *(ScriptHost**)0x8E8418;
+auto& pScriptHost = *(ScriptHost**)0x6C5224;
 
 auto luaL_checktype = (void(*)(void*, int, int))0x50FD50;
 auto luaL_checkudata = (void*(*)(void*, int, const char*))0x50F1E0;
@@ -31,5 +31,10 @@ auto lua_rawgeti = (void(*)(void*, int, int))0x50E970;
 auto lua_tolstring = (const wchar_t*(*)(void*, int))0x50E4D0;
 //auto lua_getfield = (void(*)(void*, int, const char*))0x5B4AD0;
 auto lua_settop = (void(*)(void*, int))0x50E090;
-//auto lua_gettable = (void(*)(void*, int))0x5B4A90;
+auto lua_gettable = (void(*)(void*, int))0x50E8D0;
 auto lua_type = (int(*)(void*, int))0x50E200;
+
+void lua_getfield(void* a1, int a2, const char* a3) {
+	lua_setglobal(a1, a3);
+	lua_gettable(a1, a2);
+}
