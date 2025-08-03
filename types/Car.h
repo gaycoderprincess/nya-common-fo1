@@ -4,7 +4,17 @@ class Car {
 public:
 	uint8_t _0[0x98];
 	FO2String sFolderPath; // +98
-	uint8_t _B4[0x3B4];
+	uint8_t _B4[0x9C];
+	float mMatrix[4*4]; // +150
+	uint8_t _190[0xB0];
+	float qQuaternion[4]; // +240
+	uint8_t _250[0x10];
+	float vVelocity[3]; // +260
+	uint8_t _29C[0x4];
+	float vAngVelocity[3]; // +270
+	uint8_t _27C[0x20];
+	float fMass; // +29C
+	uint8_t _2A0[0x1C8];
 	float fNitro; // +468
 	float fMaxNitro; // +46C
 	uint8_t _470[0xCAC];
@@ -17,6 +27,18 @@ public:
 	float fDamage; // +377C
 	uint8_t _3780[0x38];
 	float fTimeInAir; // +37B8
+
+#ifdef NYA_MATH_H
+	inline NyaMat4x4* GetMatrix() {
+		return (NyaMat4x4*)mMatrix;
+	}
+	inline NyaVec3* GetVelocity() {
+		return (NyaVec3*)vVelocity;
+	}
+	inline NyaVec3* GetAngVelocity() {
+		return (NyaVec3*)vAngVelocity;
+	}
+#endif
 
 	static inline auto LaunchRagdoll = (void(__stdcall*)(Car*, float))0x414580;
 	static inline auto Reset = (void(__stdcall*)(Car*, float*, float*))0x41AB90;
