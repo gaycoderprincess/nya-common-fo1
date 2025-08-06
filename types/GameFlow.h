@@ -45,7 +45,10 @@ public:
 	uint32_t nCurrentClass; // +98
 	uint8_t _9C[0x8];
 	uint32_t nAutosaveSlot; // +A4
-	uint8_t _A8[0x70];
+	uint8_t _A8[0xC];
+	uint32_t nMoneyGained; // +B4
+	uint32_t nMoneySpent; // +B8
+	uint8_t _BC[0x5C];
 	uint8_t aCarUpgrades[40]; // +118
 	uint32_t nNumCarUpgrades; // +140
 	uint8_t _144[0x20C4];
@@ -68,7 +71,9 @@ public:
 	eSubEventType nSubEventType; // +158
 	uint8_t _15C[0x49C];
 	PlayerProfile Profile; // +5F8
-	uint8_t _2800[0x28];
+	uint8_t _2800[0x10];
+	uint8_t nIsPaused; // +2810
+	uint8_t _2811[0x17];
 	PlayerHost* pHost; // +2828
 	uint8_t _282C[0xC4];
 	MenuInterface* pMenuInterface; // +28F0

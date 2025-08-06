@@ -5,7 +5,11 @@ public:
 	uint8_t _C[0xC];
 	bool bHasFinished; // +18
 	bool bIsDNF; // +19
-	uint8_t _1A[0x46];
+	uint8_t _1A[0x1E];
+	uint32_t nStuntMetersScore[3]; // +38 longjump, highjump (meters = score * 100)
+	uint8_t _44[0x8];
+	uint32_t nStuntPointsScore[3]; // +4C darts, clown, curling, bowling
+	uint8_t _58[0x8];
 	uint32_t nCurrentLap; // +60
 	uint8_t _64[0x30];
 	uint32_t nFinishTime; // +94
