@@ -1,5 +1,14 @@
 class Player;
 
+enum class eCarFixPart : uint32_t {
+	BODY = 0,
+	ENGINE = 1,
+	WHEELS = 4,
+	SUSPENSION = 5,
+	WINDOWS = 7,
+	LIGHTS = 8,
+};
+
 class Car {
 public:
 	uint8_t _0[0x98];
@@ -42,4 +51,16 @@ public:
 
 	static inline auto LaunchRagdoll = (void(__stdcall*)(Car*, float))0x414580;
 	static inline auto Reset = (void(__stdcall*)(Car*, float*, float*))0x41AB90;
+
+	static inline uintptr_t Fix_call = 0x416B60;
+	int __attribute__((naked)) __fastcall FixPart(eCarFixPart part) {
+		__asm__ (
+			"mov eax, edx\n\t"
+			"call %0\n\t"
+			"ret\n\t"
+				:
+				:  "m" (Fix_call)
+		);
+	}
+
 };

@@ -35,7 +35,8 @@ class PlayerProfile {
 public:
 	uint8_t _0[0x52];
 	wchar_t wsPlayerName[16]; // +52
-	uint8_t _72[0x6];
+	uint8_t _72[0x2];
+	uint32_t nMoney; // +74
 	uint32_t nCarType; // +78
 	uint32_t nCarClass; // +7C
 	uint32_t nCarSkin; // +80
