@@ -27,7 +27,9 @@ public:
 	uint8_t _0[0x8];
 	uint32_t nNumPlayers; // +8
 	uint32_t nNumLaps; // +C
-	uint8_t _10[0x64];
+	uint8_t _10[0x8];
+	uint32_t nHideRaceHUD; // +18
+	uint8_t _1C[0x58];
 	PlayerScoreRace** aScores; // +74
 };
 auto& pScoreManager = *(ScoreManager***)0x6C5238;

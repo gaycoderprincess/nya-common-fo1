@@ -27,3 +27,5 @@ public:
 	virtual void _vf12() = 0;
 	virtual void _vf_ResetCar(int) = 0;
 };
+
+// AIPlayer +674 is probably derby ai bool

@@ -11,7 +11,12 @@ enum class eCarFixPart : uint32_t {
 
 class Car {
 public:
-	uint8_t _0[0x98];
+	int nObjectsSmashedThisFrame[10]; // +0
+	struct tCarCollisionData {
+		uint32_t unknown;
+		float damage;
+	} aCarCollisions[8]; // +28
+	uint8_t _68[0x30];
 	FO2String sFolderPath; // +98
 	uint8_t _B4[0x9C];
 	float mMatrix[4*4]; // +150
@@ -30,7 +35,9 @@ public:
 	float vDriverLoc[3]; // +111C
 	uint8_t _1128[0xDAC];
 	float fRagdollVelocity; // +1ED4
-	uint8_t _1ED8[0x1850];
+	uint8_t _1ED8[0x28];
+	uint32_t nIsRagdolled; // +1F00
+	uint8_t _1F04[0x1824];
 	Player* pPlayer; // +3728
 	uint8_t _372C[0x50];
 	float fDamage; // +377C
@@ -62,5 +69,4 @@ public:
 				:  "m" (Fix_call)
 		);
 	}
-
 };
