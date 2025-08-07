@@ -17,3 +17,4 @@ auto& aGameSettings = *(tGameSetting**)0x4399E2;
 
 auto& nInterfaceMusicVolume = *(int*)0x6C02E0;
 auto& nIngameMusicVolume = *(int*)0x6C02E8;
+auto& nIngameSfxVolume = *(int*)0x6C02F0;

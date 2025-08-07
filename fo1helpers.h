@@ -21,12 +21,16 @@ int GetNumSkinsForCar(int carId) {
 enum eGameState {
 	GAME_STATE_NONE,
 	GAME_STATE_MENU,
-	GAME_STATE_RACE
+	GAME_STATE_RACE,
+	GAME_STATE_REPLAY
 };
 
 int GetGameState() {
 	if (pGameFlow->pMenuInterface) return GAME_STATE_MENU;
-	if (pPlayerHost) return GAME_STATE_RACE;
+	if (pPlayerHost) {
+		if (pPlayerHost->nIsInReplay) return GAME_STATE_REPLAY;
+		return GAME_STATE_RACE;
+	}
 	return GAME_STATE_NONE;
 }
 

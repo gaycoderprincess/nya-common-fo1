@@ -13,6 +13,7 @@
 #include "types/GameSettings.h"
 #include "types/ScoreManager.h"
 #include "types/LoadingScreen.h"
+#include "types/Track.h"
 #include "languages.h"
 
 auto gPalette = (uint32_t*)0x6C44E8;

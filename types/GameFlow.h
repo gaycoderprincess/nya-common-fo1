@@ -24,6 +24,8 @@ public:
 	FO2Vector<Player*> aLocalPlayers; // +20
 	uint8_t _2C[0x1E220];
 	int32_t nRaceTime; // +1E24C
+	uint8_t _1E250[0xC];
+	uint32_t nIsInReplay; // +1E25C
 
 	int GetNumPlayers() {
 		return aPlayers.GetSize();
@@ -75,7 +77,9 @@ public:
 	uint8_t nIsPaused; // +2810
 	uint8_t _2811[0x17];
 	PlayerHost* pHost; // +2828
-	uint8_t _282C[0xC4];
+	uint8_t _282C[0xB8];
+	uint32_t nIsInReplay; // +28E4
+	uint8_t _28E8[0x8];
 	MenuInterface* pMenuInterface; // +28F0
 	uint8_t _28F4[0x40];
 	int32_t nSaveSlot; // +2934
