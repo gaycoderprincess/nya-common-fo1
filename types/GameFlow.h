@@ -23,7 +23,7 @@ public:
 	FO2Vector<Player*> aPlayers; // +14
 	FO2Vector<Player*> aLocalPlayers; // +20
 	uint8_t _2C[0x1E220];
-	uint32_t nRaceTime; // +1E24C
+	int32_t nRaceTime; // +1E24C
 
 	int GetNumPlayers() {
 		return aPlayers.GetSize();
