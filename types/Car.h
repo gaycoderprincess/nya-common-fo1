@@ -13,8 +13,8 @@ class Car {
 public:
 	int nObjectsSmashedThisFrame[10]; // +0
 	struct tCarCollisionData {
-		uint32_t unknown;
-		float damage;
+		int32_t lastHitTimestamp; // +0
+		float damage; // +4
 	} aCarCollisions[8]; // +28
 	uint8_t _68[0x30];
 	FO2String sFolderPath; // +98

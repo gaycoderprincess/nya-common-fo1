@@ -39,8 +39,11 @@ public:
 	static inline uintptr_t ctor_jmp = 0x4EEF10;
 	void __attribute__((naked)) __thiscall ctor() {
 		__asm__ (
+			"push esi\n\t"
 			"mov esi, ecx\n\t"
-			"jmp %0\n\t"
+			"call %0\n\t"
+			"pop esi\n\t"
+			"ret\n\t"
 				:
 				:  "m" (ctor_jmp)
 		);
@@ -49,8 +52,11 @@ public:
 	static inline uintptr_t dtor_jmp = 0x4EF110;
 	void __attribute__((naked)) __thiscall dtor() {
 		__asm__ (
+			"push esi\n\t"
 			"mov esi, ecx\n\t"
-			"jmp %0\n\t"
+			"call %0\n\t"
+			"pop esi\n\t"
+			"ret\n\t"
 				:
 				:  "m" (dtor_jmp)
 		);
@@ -59,8 +65,13 @@ public:
 	static inline uintptr_t Load_jmp = 0x4EEFF0;
 	bool __attribute__((naked)) __thiscall Load(const char* path, int args) {
 		__asm__ (
-			"mov esi, ecx\n\t"
-			"jmp %0\n\t"
+			"push esi\n\t"
+			"mov esi, ecx\n\t" // this
+			"push dword ptr [esp+0xC]\n\t"
+			"push dword ptr [esp+0xC]\n\t"
+			"call %0\n\t"
+			"pop esi\n\t"
+			"ret 8\n\t"
 				:
 				:  "m" (Load_jmp)
 		);
