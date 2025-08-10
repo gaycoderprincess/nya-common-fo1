@@ -125,7 +125,7 @@ public:
 auto& pGameFlow = *(GameFlow**)0x6A7CE0;
 
 Player* GetPlayer(int id) {
-	auto host = pGameFlow->pHost;
+	auto host = pPlayerHost;
 	if (!host) return nullptr;
 	if (id < 0 || id >= host->aPlayers.GetSize()) return nullptr;
 	auto ply = host->aPlayers[id];

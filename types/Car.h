@@ -69,4 +69,15 @@ public:
 				:  "m" (Fix_call)
 		);
 	}
+
+	static inline uintptr_t GetDerbyDamage_call = 0x416E40;
+	float __attribute__((naked)) __fastcall GetDerbyDamage() {
+		__asm__ (
+			"mov eax, ecx\n\t"
+			"call %0\n\t"
+			"ret\n\t"
+				:
+				:  "m" (GetDerbyDamage_call)
+		);
+	}
 };
