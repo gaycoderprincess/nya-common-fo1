@@ -11,7 +11,7 @@ enum class eCarFixPart : uint32_t {
 
 class Car {
 public:
-	int nObjectsSmashedThisFrame[10]; // +0
+	int aObjectsSmashed[10]; // +0
 	struct tCarCollisionData {
 		int32_t lastHitTimestamp; // +0
 		float damage; // +4
@@ -33,7 +33,13 @@ public:
 	float fMaxNitro; // +46C
 	uint8_t _470[0xCAC];
 	float vDriverLoc[3]; // +111C
-	uint8_t _1128[0xDAC];
+	uint8_t _1128[0x180];
+	float fGasPedal; // +12A8
+	float fBrakePedal; // +12AC
+	float fNitroButton; // +12B0
+	float fHandbrake; // +12B4
+	float fSteerAngle; // +12B8
+	uint8_t _12BC[0xC18];
 	float fRagdollVelocity; // +1ED4
 	uint8_t _1ED8[0x28];
 	uint32_t nIsRagdolled; // +1F00
@@ -81,3 +87,6 @@ public:
 		);
 	}
 };
+
+auto fBonusTypeMayhem = (float*)0x6BD990;
+auto fBonusTypePrice = (float*)0x6BD968;

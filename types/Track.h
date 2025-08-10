@@ -12,6 +12,8 @@ class Track {
 public:
 	uint8_t _0[0x26B4];
 	Minimap* pMinimap; // +26B4
+
+	static inline auto aBonusObjects = (int*)0x6BD9E0; // object count per type
 };
 
 auto& pEnvironment = *(Track**)0x6C004C;
