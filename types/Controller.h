@@ -1,0 +1,43 @@
+class Controller {
+public:
+	uint8_t _4[0x644];
+	struct tInput {
+		uint32_t keyboardKey;
+		uint8_t _0[0xC];
+	} aInputs[20];
+
+	// KeyboardController functions
+	static inline auto IsMenuInputJustPressed = (bool(__thiscall*)(Controller*, int))0x4FB090;
+	static inline auto IsGameInputJustPressed = (bool(__thiscall*)(Controller*, int))0x4FB050;
+	static inline auto GetInputValue = (int(__thiscall*)(Controller*, int))0x4FB000;
+	static inline auto IsInputJustPressed2 = (int(__thiscall*)(Controller*, int))0x4FB0E0;
+	static inline auto GetInputValue2 = (int(__thiscall*)(Controller*, int))0x4FB110;
+	static inline auto GetAnalogInput = (int(__thiscall*)(Controller*, int, float*))0x4F2F10;
+
+	virtual void _vf0() = 0;
+	virtual void _vf1() = 0;
+	virtual void _vf2() = 0;
+	virtual void Reset() = 0;
+	virtual void _vf4() = 0;
+	virtual void _vf5() = 0;
+	virtual void _vf6() = 0;
+	virtual void _vf7() = 0;
+	virtual void _vf8() = 0;
+	virtual bool _vf_IsMenuInputJustPressed(int input) = 0;
+	virtual bool _vf_IsGameInputJustPressed(int input) = 0;
+	virtual int _vf_GetInputValue(int input) = 0;
+	virtual void _vf12() = 0;
+	virtual void _vf13() = 0;
+	virtual int _vf_IsInputJustPressed2(int input) = 0;
+	virtual int _vf_GetInputValue2(int input) = 0;
+	virtual float _vf_GetAnalogInput(int input) = 0;
+};
+
+class InputManager {
+public:
+	uint8_t _0[0x4];
+	uint32_t nNumControllers; // +4
+	uint8_t _8[0x10];
+	Controller* aControllers[]; // +18
+};
+auto& pInputManager = *(InputManager**)0x6C5244;

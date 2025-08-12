@@ -7,6 +7,7 @@
 #include "types/DeviceD3d.h"
 #include "types/FileManager.h"
 #include "types/Font.h"
+#include "types/Controller.h"
 #include "types/Car.h"
 #include "types/Player.h"
 #include "types/GameFlow.h"
