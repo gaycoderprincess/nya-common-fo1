@@ -10,7 +10,8 @@ public:
 	uint8_t _2E0[0x44];
 	uint32_t nPlayerId; // +324
 	uint32_t nPlayerType; // +328
-	uint8_t _32C[0x60];
+	uint32_t nStartPosition; // +32C
+	uint8_t _330[0x5C];
 	FO2WString sPlayerName; // +38C
 	uint8_t _3A8[0x9C];
 	uint32_t nCurrentSplit; // +444
