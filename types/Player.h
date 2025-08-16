@@ -12,12 +12,20 @@ public:
 	uint32_t nPlayerType; // +328
 	uint8_t _32C[0x60];
 	FO2WString sPlayerName; // +38C
-	uint8_t _3A8[0xE0];
+	uint8_t _3A8[0x9C];
+	uint32_t nCurrentSplit; // +444
+	uint32_t nCurrentLap; // +448
+	uint8_t _44C[0x3C];
 	float fOutputSteerAngle; // +488
 	float fGasPedal; // +48C
 	float fBrakePedal; // +490
 	float fHandbrake; // +494
 	float fNitroButton; // +498
+	uint8_t _49C[0x4];
+	struct {
+		bool bHoldBrake : 1; // 1
+		bool bIsStaging : 1; // 2
+	} nInputFlags; // +4A0
 
 	static inline auto ResetCar = (int(__thiscall*)(Player*, int))0x449280;
 

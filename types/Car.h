@@ -19,7 +19,7 @@ public:
 	uint8_t _68[0x30];
 	FO2String sFolderPath; // +98
 	uint8_t _B4[0x9C];
-	float mMatrix[4*4]; // +150
+	float mMatrix[4*4]; // +150 used as ptr for collision checks
 	uint8_t _190[0xB0];
 	float qQuaternion[4]; // +240
 	uint8_t _250[0x10];

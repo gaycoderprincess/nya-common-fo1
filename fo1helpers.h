@@ -34,10 +34,12 @@ int GetGameState() {
 	return GAME_STATE_NONE;
 }
 
+#ifndef NYA_COMMON_NO_D3D
 NyaDrawing::CNyaRGBA32 GetPaletteColor(int id) {
 	auto col = *(NyaDrawing::CNyaRGBA32*)&gPalette[id];
 	return {col.b, col.g, col.r, 255};
 }
+#endif
 
 bool DoesTrackExist(int id) {
 	auto lua = pScriptHost->pLUAStruct->pLUAContext;

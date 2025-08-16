@@ -14,6 +14,13 @@ public:
 };
 auto& pScriptHost = *(ScriptHost**)0x6C5224;
 
+struct tLUAStack {
+	uint8_t _0[0x14];
+	int32_t nLineNumber; // +14
+	uint8_t _18[0x8];
+	char sFilename[64]; // +20
+};
+
 auto luaL_checktype = (void(*)(void*, int, int))0x50FD50;
 auto luaL_checkudata = (void*(*)(void*, int, const char*))0x50F1E0;
 auto luaL_typerror = (void(*)(void*, int, const char*))0x50FD10;
@@ -33,6 +40,8 @@ auto lua_tolstring = (const wchar_t*(*)(void*, int))0x50E4D0;
 auto lua_settop = (void(*)(void*, int))0x50E090;
 auto lua_gettable = (void(*)(void*, int))0x50E8D0;
 auto lua_type = (int(*)(void*, int))0x50E200;
+auto lua_getstack = (int(*)(void*, int, void*))0x51AA40;
+auto lua_getinfo = (int(*)(void*, const char*, void*))0x51B590;
 
 void lua_getfield(void* a1, int a2, const char* a3) {
 	lua_setglobal(a1, a3);

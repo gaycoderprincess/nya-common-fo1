@@ -6,7 +6,9 @@
 #include "types/LUA.h"
 #include "types/DeviceD3d.h"
 #include "types/FileManager.h"
+#ifndef NYA_COMMON_NO_D3D
 #include "types/Font.h"
+#endif
 #include "types/Controller.h"
 #include "types/Car.h"
 #include "types/Player.h"

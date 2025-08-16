@@ -19,3 +19,5 @@ auto& nInterfaceMusicVolume = *(int*)0x6C02E0;
 auto& nIngameMusicVolume = *(int*)0x6C02E8;
 auto& nIngameSfxVolume = *(int*)0x6C02F0;
 auto& nControllerDeadzone = *(int*)0x6BEE0C;
+auto& nNumPlayers = *(int*)0x6C0294;
+auto& nNumCars = *(int*)0x6C0298;
