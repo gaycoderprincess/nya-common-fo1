@@ -231,6 +231,10 @@ public:
 	float fDamage; // +377C
 	uint8_t _3780[0x38];
 	float fTimeInAir; // +37B8
+	uint8_t _37BC[0x3C];
+	void* pEngineSound; // +37F8 not a pointer, data begins here
+	uint8_t _37FC[0xA5C];
+	void* pSurfaceSounds; // +4258 not a pointer, data begins here
 
 #ifdef NYA_MATH_H
 	inline NyaMat4x4* GetMatrix() {
@@ -254,6 +258,27 @@ public:
 	static inline auto LaunchRagdoll = (void(__stdcall*)(Car*, float))0x414580;
 	static inline auto Reset = (void(__stdcall*)(Car*, float*, float*))0x41AB90;
 	static inline auto SelectEngine = (void(__stdcall*)(Car*, int))0x42E850;
+
+	static inline uintptr_t LoadEngineSounds_call = 0x40DE70;
+	static void __attribute__((naked)) __fastcall LoadEngineSounds(bool useAISounds, int unk0, void* engineSounds, const char* path, int unk0_2) {
+		__asm__ (
+			"mov eax, ecx\n\t"
+			"mov ecx, edx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (LoadEngineSounds_call)
+		);
+	}
+
+	static inline uintptr_t LoadSurfaceSounds_call = 0x412530;
+	static void __attribute__((naked)) __thiscall LoadSurfaceSounds(int unk4, void* surfaceSounds, const char* path) {
+		__asm__ (
+			"mov eax, ecx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (LoadSurfaceSounds_call)
+		);
+	}
 
 	static inline uintptr_t InitEngine_call = 0x42E9A0;
 	void __attribute__((naked)) __fastcall InitEngine(int engine) {
@@ -304,7 +329,7 @@ public:
 		);
 	}
 };
-static_assert(sizeof(Car) == 0x37BC);
+static_assert(sizeof(Car) == 0x425C);
 
 auto fBonusTypeMayhem = (float*)0x6BD990;
 auto fBonusTypePrice = (float*)0x6BD968;
