@@ -99,6 +99,28 @@ public:
 
 class Body {
 public:
+	class Suspension {
+	public:
+		uint8_t _0[0x4];
+		float fMinLength; // +11D8
+		float fMaxLength; // +11DC
+		float fRestLength; // +11E0
+		float fDefaultCompression; // +11E4
+		float fBumpDamp; // +11E8
+		float fReboundDamp; // +11EC
+		float fBumperLength; // +11F0
+		float fBumperConst; // +11F4
+		float fBumperRestitution; // +11F8
+		float fRollBarStiffness; // +11FC
+		float fCamberAngle; // +1200 * 0.017453292
+		float fCamberChangeUp; // +1204 * 0.017453292
+		float fCamberChangeDown; // +1208 * 0.017453292
+		float fCamberChangeIn; // +120C
+		float fCamberChangeOut; // +1210
+		uint8_t _1214[0x4];
+	};
+	static_assert(sizeof(Suspension) == 0x44);
+
 	float fWheelDisplacement; // +1110
 	float fWheelAligningTorqueLimits[2]; // +1114
 	float fDriverLoc[3]; // +111C
@@ -129,12 +151,40 @@ public:
 	float fFFFrictionOffset; // +11C8
 	float fFFCenteringNominalLoad; // +11CC
 	float fFFCenteringOffset; // +11D0
-	uint8_t _11D4[0xB0];
+	Suspension SuspensionFront; // +11D4
+	Suspension SuspensionRear; // +1218
+	float fFrontTireRadius; // +125C
+	float fFrontTireWidth; // +1260
+	float fFrontTireMass; // +1264
+	float fFrontTireMomentOfInertia; // +1268
+	float fFrontSuspensionLift; // +126C
+	float fRearTireRadius; // +1270
+	float fRearTireWidth; // +1274
+	float fRearTireMass; // +1278
+	float fRearTireMomentOfInertia; // +127C
+	float fRearSuspensionLift; // +1280
 	float fArcadeSteerBalanceFactor[3]; // +1284
 	float fArcadeSteerBalanceRate[3]; // +1290
 	float fArcadeBrakePower; // +129C
 };
 static_assert(sizeof(Body) == 0x12A0-0x1110);
+
+class TireDynamics {
+public:
+	float fRollingResistance; // +0
+	float fInducedDragCoeff; // +4
+	float fPneumaticTrail; // +8
+	float fPneumaticOffset; // +C
+	float fZStiffness[3]; // +10
+	float fXStiffness[3]; // +1C
+	float fCStiffness[2]; // +28
+	float fZFriction[2]; // +30
+	float fXFriction[2]; // +38
+	float fSlideControl; // +40
+	float fUnderSteer; // +44
+	float fSlowDown; // +48
+};
+static_assert(sizeof(TireDynamics) == 0x4C);
 
 class Car {
 public:
@@ -169,7 +219,9 @@ public:
 	float fNitroButton; // +12B0
 	float fHandbrake; // +12B4
 	float fSteerAngle; // +12B8
-	uint8_t _12BC[0xC18];
+	uint8_t _12BC[0x54];
+	TireDynamics TireDynamics[8]; // +1310
+	uint8_t _1570[0x964];
 	float fRagdollVelocity; // +1ED4
 	uint8_t _1ED8[0x28];
 	uint32_t nIsRagdolled; // +1F00
@@ -201,6 +253,34 @@ public:
 
 	static inline auto LaunchRagdoll = (void(__stdcall*)(Car*, float))0x414580;
 	static inline auto Reset = (void(__stdcall*)(Car*, float*, float*))0x41AB90;
+	static inline auto SelectEngine = (void(__stdcall*)(Car*, int))0x42E850;
+
+	static inline uintptr_t InitEngine_call = 0x42E9A0;
+	void __attribute__((naked)) __fastcall InitEngine(int engine) {
+		__asm__ (
+			"pushad\n\t"
+			"mov eax, ecx\n\t"
+			"mov ebx, edx\n\t"
+			"call %0\n\t"
+			"popad\n\t"
+			"ret\n\t"
+				:
+				:  "m" (InitEngine_call)
+		);
+	}
+
+	static inline uintptr_t FinishInitEngine_call = 0x42EAF0;
+	void __attribute__((naked)) __fastcall FinishInitEngine(int unknown) {
+		__asm__ (
+			"pushad\n\t"
+			"mov eax, edx\n\t"
+			"call %0\n\t"
+			"popad\n\t"
+			"ret\n\t"
+				:
+				:  "m" (FinishInitEngine_call)
+		);
+	}
 
 	static inline uintptr_t Fix_call = 0x416B60;
 	int __attribute__((naked)) __fastcall FixPart(eCarFixPart part) {
