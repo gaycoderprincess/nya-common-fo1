@@ -10,6 +10,16 @@ public:
 		if (maxLength < 16) return (const char*)&string;
 		return string;
 	}
+
+	static inline uintptr_t Set_call = 0x40DC50;
+	int __attribute__((naked)) __fastcall Set(const char* string, size_t length) {
+		__asm__ (
+			"mov eax, edx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (Set_call)
+		);
+	}
 };
 
 class FO2WString {

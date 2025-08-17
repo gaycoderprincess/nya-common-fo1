@@ -97,6 +97,45 @@ public:
 	Differential Differential; // +1F8 (+548)
 };
 
+class Body {
+public:
+	float fWheelDisplacement; // +1110
+	float fWheelAligningTorqueLimits[2]; // +1114
+	float fDriverLoc[3]; // +111C
+	uint32_t nDriverType; // +1128
+	float fMass; // +112C
+	float fMass2; // +1130
+	uint8_t _1134[0x4];
+	float fMomentOfInertia[3]; // +1138
+	float fCenterOfMass[3]; // +1144
+	float fCenterOfMass2[3]; // +1150
+	float fAeroDrag[3]; // +115C
+	float fAeroDragLoc[3]; // +1168
+	float fDamping[2]; // +1174
+	float fCenterOfDownForce[3]; // +117C
+	float fDownForceConst; // +1188
+	float fSteeringSpeeds[2]; // +118C
+	float fSteeringLimit; // +1194
+	float fSteeringReduction; // +1198
+	float fTireTurnAngleIn; // +119C * 0.017453292
+	float fTireTurnAngleOut; // +11A0 * 0.017453292
+	float fTireCenteringSpeed; // +11A4
+	float fBrakeBalance[3]; // +11A8
+	float fBrakeTorque; // +11B4
+	float fHandBrakeTorque; // +11B8
+	uint32_t nFrontTraction; // +11BC
+	uint32_t nRearTraction; // +11C0
+	float fFFFrictionNominalLoad; // +11C4
+	float fFFFrictionOffset; // +11C8
+	float fFFCenteringNominalLoad; // +11CC
+	float fFFCenteringOffset; // +11D0
+	uint8_t _11D4[0xB0];
+	float fArcadeSteerBalanceFactor[3]; // +1284
+	float fArcadeSteerBalanceRate[3]; // +1290
+	float fArcadeBrakePower; // +129C
+};
+static_assert(sizeof(Body) == 0x12A0-0x1110);
+
 class Car {
 public:
 	int aObjectsSmashed[10]; // +0
@@ -104,7 +143,11 @@ public:
 		int32_t lastHitTimestamp; // +0
 		float damage; // +4
 	} aCarCollisions[8]; // +28
-	uint8_t _68[0x30];
+	uint8_t _68[0x8];
+	float fBrakeBalance; // +70
+	float fTireTurnAngleIn; // +74
+	float fTireTurnAngleOut; // +78
+	FO2String sName; // +7C
 	FO2String sFolderPath; // +98
 	uint8_t _B4[0x9C];
 	float mMatrix[4*4]; // +150 used as ptr for collision checks
@@ -118,9 +161,9 @@ public:
 	float fMass; // +29C
 	uint8_t _2A0[0xB0];
 	CarPerformance Performance; // +350
-	uint8_t _5B8[0xB64];
-	float vDriverLoc[3]; // +111C
-	uint8_t _1128[0x180];
+	uint8_t _5B8[0xB58];
+	Body Body; // +1110
+	uint8_t _12A0[0x8];
 	float fGasPedal; // +12A8
 	float fBrakePedal; // +12AC
 	float fNitroButton; // +12B0
