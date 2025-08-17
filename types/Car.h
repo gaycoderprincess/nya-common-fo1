@@ -9,6 +9,94 @@ enum class eCarFixPart : uint32_t {
 	LIGHTS = 8,
 };
 
+class Car;
+class Engine;
+class CarPerformance;
+
+class Engine {
+public:
+	uint8_t _0[0x10];
+	CarPerformance* pPerformance; // +10
+	float fInertiaEngine; // +14
+	float fInvInertiaEngine; // +18
+	uint8_t _1C[0x24];
+	float fEngineFriction; // +40
+	float fInertiaEngine2; // +44
+	float fZeroPowerRpm; // +48 IdleRpm / 2
+	float fIdleRpm; // +4C
+	float fTorqueMax; // +50
+	struct tTorqueCurve {
+		float fRpm;
+		float fCurve;
+	} aTorque[20]; // +54
+	uint32_t nTorqueCurveParams; // +F4
+	float fExhaustPeakRpm; // +F8
+	uint8_t _FC[0x4];
+	float fUnknown_100; // +100
+	float fUnknown_104; // +104
+	float fTurboAcceleration; // +108
+	float fNitroAcceleration; // +10C
+	float fNitro; // +110
+	float fMaxNitro; // +114
+	uint8_t _118[0x14];
+	float fMass; // +12C
+
+	static inline auto GetEngineSpeed = (float(__fastcall*)(uint32_t fExhaustPeakRpm, Engine*, float fIdleRpm))0x431D10;
+};
+static_assert(sizeof(Engine) == 0x130);
+
+class Gearbox {
+public:
+	uint8_t _0[0x10];
+	CarPerformance* pPerformance; // +10
+	uint8_t _14[0x40];
+	uint32_t nNumGears; // +54
+	float fGearRRatio; // +58
+	float fGearNRatio; // +5C
+	float fGear1Ratio; // +60
+	float fGear2Ratio; // +64
+	float fGear3Ratio; // +68
+	float fGear4Ratio; // +6C
+	float fGear5Ratio; // +70
+	float fGear6Ratio; // +74
+	float fGearRInertia; // +78
+	float fGearNInertia; // +7C
+	float fGear1Inertia; // +80
+	float fGear2Inertia; // +84
+	float fGear3Inertia; // +88
+	float fGear4Inertia; // +8C
+	float fGear5Inertia; // +90
+	float fGear6Inertia; // +94
+	uint8_t _98[0x20];
+	float fClutchEngageTime; // +B8
+	float fClutchReleaseTime; // +BC
+};
+static_assert(sizeof(Gearbox) == 0xC0);
+
+class Differential {
+public:
+	uint8_t _0[0x10];
+	CarPerformance* pPerformance; // +10
+	float fInertiaDriveShaft; // +14
+	float fInvInertiaDriveShaft; // +18
+	float fEndRatio; // +1C
+	float fInvEndRatio; // +20
+	uint8_t _24[0x1C];
+	float fUnknown40; // +40
+	uint8_t _44[0x28];
+	float fClutchTorque; // +6C
+};
+static_assert(sizeof(Differential) == 0x70);
+
+class CarPerformance {
+public:
+	Car* pCar; // +0 (+350)
+	Engine* pEngine; // +4 (+354)
+	Engine Engine; // +8 (+358)
+	Gearbox Gearbox; // +138 (+488)
+	Differential Differential; // +1F8 (+548)
+};
+
 class Car {
 public:
 	int aObjectsSmashed[10]; // +0
@@ -24,14 +112,13 @@ public:
 	float qQuaternion[4]; // +240
 	uint8_t _250[0x10];
 	float vVelocity[3]; // +260
-	uint8_t _29C[0x4];
+	uint8_t _26C[0x4];
 	float vAngVelocity[3]; // +270
 	uint8_t _27C[0x20];
 	float fMass; // +29C
-	uint8_t _2A0[0x1C8];
-	float fNitro; // +468
-	float fMaxNitro; // +46C
-	uint8_t _470[0xCAC];
+	uint8_t _2A0[0xB0];
+	CarPerformance Performance; // +350
+	uint8_t _5B8[0xB64];
 	float vDriverLoc[3]; // +111C
 	uint8_t _1128[0x180];
 	float fGasPedal; // +12A8
@@ -62,6 +149,13 @@ public:
 	}
 #endif
 
+	inline float& GetNitro() {
+		return Performance.Engine.fNitro;
+	}
+	inline float& GetMaxNitro() {
+		return Performance.Engine.fMaxNitro;
+	}
+
 	static inline auto LaunchRagdoll = (void(__stdcall*)(Car*, float))0x414580;
 	static inline auto Reset = (void(__stdcall*)(Car*, float*, float*))0x41AB90;
 
@@ -87,6 +181,7 @@ public:
 		);
 	}
 };
+static_assert(sizeof(Car) == 0x37BC);
 
 auto fBonusTypeMayhem = (float*)0x6BD990;
 auto fBonusTypePrice = (float*)0x6BD968;
