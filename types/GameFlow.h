@@ -103,7 +103,8 @@ public:
 	uint8_t _24[0x110];
 	uint32_t nClass; // +134
 	uint32_t nCar; // +138
-	uint8_t _13C[0x8];
+	uint32_t nCarSkin; // +13C
+	uint8_t _140[0x4];
 	eGameMode nGameMode; // +144
 	uint32_t nIsCareerMode; // +148
 	uint8_t _14C[0x4];

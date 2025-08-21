@@ -4,7 +4,9 @@ public:
 	Car* pCar; // +2C0
 	uint32_t nCarId; // +2C4
 	uint32_t nCarSkinId; // +2C8
-	uint8_t _2CC[0xC];
+	uint8_t _2CC[0x4];
+	uint32_t nCharacterTypeId; // +2D0
+	uint32_t nCharacterSkinId; // +2D4
 	float fNitroFromPropsTotal; // +2D8
 	float fNitroFromPropsLast; // +2DC
 	uint8_t _2E0[0x44];
@@ -27,6 +29,7 @@ public:
 		bool bHoldBrake : 1; // 1
 		bool bIsStaging : 1; // 2
 	} nInputFlags; // +4A0
+	uint8_t _4A4[0x2C];
 
 	static inline auto ResetCar = (int(__thiscall*)(Player*, int))0x449280;
 
@@ -45,5 +48,17 @@ public:
 	virtual void _vf12() = 0;
 	virtual void _vf_ResetCar(int) = 0;
 };
+static_assert(sizeof(Player) == 0x4D0);
 
-// AIPlayer +674 is probably derby ai bool
+class AIPlayer : public Player {
+public:
+	uint8_t _4D0[0x198];
+	uint32_t nAIId; // +668
+	uint32_t nAIClassId; // +66C
+	uint8_t _670[0x4];
+	uint32_t nIsDerbyAI; // +674
+	uint8_t _678[0x548];
+
+	static inline auto LoadProfile = (void(__stdcall*)(AIPlayer*))0x406530;
+};
+static_assert(sizeof(AIPlayer) == 0xBC0);
