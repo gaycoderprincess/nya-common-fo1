@@ -21,6 +21,7 @@
 #include "types/LoadingScreen.h"
 #include "types/Track.h"
 #include "types/EventManager.h"
+#include "types/CameraManager.h"
 
 auto gPalette = (uint32_t*)0x6C44E8;
 
@@ -28,3 +29,11 @@ auto gPalette = (uint32_t*)0x6C44E8;
 #include "fo1hooks.h"
 
 auto& nMusicPopupTimeOffset = *(int*)0x6BFFEC;
+
+class RNGGenerator {
+public:
+	static inline auto& pCurrentValue = *(int**)0x6BFD30;
+	static inline auto& nNumValuesLeft = *(int*)0x6948F0;
+	static inline auto aValueTable = (int*)0x6BF370;
+	static inline auto Reset = (void(*)())0x501AC0;
+};
