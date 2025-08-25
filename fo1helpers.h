@@ -53,11 +53,11 @@ bool DoesTrackExist(int id) {
 }
 
 int GetNumTracks() {
-	int i = 0;
-	while (DoesTrackExist(i+1)) {
-		i++;
+	int count = 0;
+	for (int i = 0; i < 256; i++) {
+		if (DoesTrackExist(i+1)) count = i+1;
 	}
-	return i;
+	return count;
 }
 
 bool DoesTrackValueExist(int id, const char* name) {
