@@ -23,7 +23,7 @@ enum eControllerButton {
 
 class Controller {
 public:
-	uint8_t _4[0x644];
+	uint32_t _4[0x191];
 	struct tInput {
 		uint32_t keyboardKey;
 		uint8_t _0[0xC];

@@ -1,6 +1,8 @@
 class Player {
 public:
-	uint8_t _4[0x2BC];
+	uint8_t _4[0x2AC];
+	Controller* pController; // +2B0
+	uint8_t _2B4[0xC];
 	Car* pCar; // +2C0
 	uint32_t nCarId; // +2C4
 	uint32_t nCarSkinId; // +2C8
