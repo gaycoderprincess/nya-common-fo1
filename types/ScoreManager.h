@@ -11,8 +11,9 @@ public:
 	uint32_t nStuntPointsScore[3]; // +4C darts, clown, curling, bowling
 	uint8_t _58[0x8];
 	uint32_t nCurrentLap; // +60
-	uint8_t _64[0x2C];
-	uint32_t nLapTime; // +90
+	uint8_t _64[0x4];
+	int32_t nLapTimes[10]; // +68
+	uint8_t _90[0x4];
 	uint32_t nFinishTime; // +94
 
 	virtual void _vf0() = 0;
