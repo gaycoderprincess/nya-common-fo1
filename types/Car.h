@@ -256,7 +256,7 @@ public:
 	}
 
 	static inline auto LaunchRagdoll = (void(__stdcall*)(Car*, float))0x414580;
-	static inline auto Reset = (void(__stdcall*)(Car*, float*, float*))0x41AB90;
+	static inline auto Reset = (void(__stdcall*)(Car*, float* pos, float* matrix))0x41AB90;
 	static inline auto SelectEngine = (void(__stdcall*)(Car*, int))0x42E850;
 
 	static inline uintptr_t LoadEngineSounds_call = 0x40DE70;

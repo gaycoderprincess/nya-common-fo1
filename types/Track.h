@@ -10,12 +10,31 @@ static_assert(sizeof(Minimap) == 0x160);
 
 class Track {
 public:
+	struct tStartpoint {
+		float fPosition[4];
+		float fMatrix[4*4];
+	};
+	static_assert(sizeof(tStartpoint) == 0x50);
+
 	uint8_t _0[0x2068];
 	uint32_t nNumSplitpoints; // +2068
-	uint8_t _206C[0x648];
+	uint8_t _206C[0x4];
+	tStartpoint aStartpoints[8]; // +2070
+	uint8_t _22F0[0x3C4];
 	Minimap* pMinimap; // +26B4
 
 	static inline auto aBonusObjects = (int*)0x6BD9E0; // object count per type
 };
-
 auto& pEnvironment = *(Track**)0x6C004C;
+
+class TrackAI {
+public:
+	struct tSplineData {
+		uint8_t _0[0x4];
+		uint32_t nNumSplines; // +4
+	};
+	tSplineData* pAIRaceLine; // +0
+	tSplineData* pAIBorderLineLeft; // +4
+	tSplineData* pAIBorderLineRight; // +8
+};
+auto& pTrackAI = *(TrackAI**)0x6C5220;
