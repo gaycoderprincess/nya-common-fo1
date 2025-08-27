@@ -22,6 +22,7 @@
 #include "types/Track.h"
 #include "types/EventManager.h"
 #include "types/CameraManager.h"
+#include "types/IngameMenu.h"
 
 auto gPalette = (uint32_t*)0x6C44E8;
 

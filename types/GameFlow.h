@@ -19,7 +19,7 @@ public:
 
 class PlayerHost {
 public:
-	uint8_t _0[0x14];
+	uint8_t _4[0x10];
 	FO2Vector<Player*> aPlayers; // +14
 	FO2Vector<Player*> aLocalPlayers; // +20
 	uint8_t _2C[0x1E220];
@@ -30,6 +30,20 @@ public:
 	int GetNumPlayers() {
 		return aPlayers.GetSize();
 	}
+
+	virtual void _vf0() = 0;
+	virtual void _vf1() = 0;
+	virtual void _vf2() = 0;
+	virtual void _vf3() = 0;
+	virtual void _vf4() = 0;
+	virtual void _vf5() = 0;
+	virtual void _vf6() = 0;
+	virtual void _vf7() = 0;
+	virtual void _vf8() = 0;
+	virtual void _vf9() = 0;
+	virtual void _vf10() = 0;
+	virtual void _vf11() = 0;
+	virtual void StartRace() = 0;
 };
 auto& pPlayerHost = *(PlayerHost**)0x68B7C0;
 

@@ -62,5 +62,15 @@ public:
 	uint32_t nNumControllers; // +4
 	uint8_t _8[0x10];
 	Controller* aControllers[]; // +18
+
+	static inline uintptr_t IsKeyJustPressed_call = 0x4F16C0;
+	int __attribute__((naked)) __thiscall IsKeyJustPressed(int key) {
+		__asm__ (
+			"mov ebx, ecx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (IsKeyJustPressed_call)
+		);
+	}
 };
 auto& pInputManager = *(InputManager**)0x6C5244;
