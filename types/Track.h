@@ -10,13 +10,23 @@ static_assert(sizeof(Minimap) == 0x160);
 
 class Track {
 public:
+	struct tSplitpoint {
+		float fLeft[3]; // +0
+		float fRight[3]; // +C
+		float fPosition[3]; // +18
+		uint8_t _24[0x18];
+	};
+	static_assert(sizeof(tSplitpoint) == 0x3C);
+
 	struct tStartpoint {
 		float fPosition[4];
 		float fMatrix[4*4];
 	};
 	static_assert(sizeof(tStartpoint) == 0x50);
 
-	uint8_t _0[0x2068];
+	uint8_t _0[0x1168];
+	tSplitpoint aSplitpoints[32]; // +1168
+	uint8_t _18E8[0x780];
 	uint32_t nNumSplitpoints; // +2068
 	uint8_t _206C[0x4];
 	tStartpoint aStartpoints[8]; // +2070
