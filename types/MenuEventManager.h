@@ -1,4 +1,4 @@
-class EventManager {
+class MenuEventManager {
 public:
 	enum eEvent {
 		GAME_ENTERMENU = 1,
@@ -15,6 +15,8 @@ public:
 	uint32_t n58; // +58
 	uint8_t _5C[0x8];
 	uint32_t n64; // +64
+	uint8_t _68[0x90];
+	FO2WString wsKeyboardInput; // +90
 
 	void PostEvent(int eventId) {
 		nEventId = eventId;
@@ -23,6 +25,5 @@ public:
 		n58 = n64;
 	}
 };
-static_assert(sizeof(EventManager) == 0x68);
 
-auto& pEventManager = *(EventManager**)0x6C5248;
+auto& pMenuEventManager = *(MenuEventManager**)0x6C5248;

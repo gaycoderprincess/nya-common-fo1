@@ -20,7 +20,7 @@
 #include "types/ScoreManager.h"
 #include "types/LoadingScreen.h"
 #include "types/Track.h"
-#include "types/EventManager.h"
+#include "types/MenuEventManager.h"
 #include "types/CameraManager.h"
 #include "types/IngameMenu.h"
 
