@@ -114,7 +114,9 @@ class GameFlow {
 public:
 	uint8_t _0[0x20];
 	uint32_t nLevel; // +20
-	uint8_t _24[0x110];
+	uint8_t _24[0x108];
+	uint32_t nNumSplitScreenPlayers; // +12C
+	uint8_t _130[0x4];
 	uint32_t nClass; // +134
 	uint32_t nCar; // +138
 	uint32_t nCarSkin; // +13C

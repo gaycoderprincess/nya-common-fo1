@@ -18,7 +18,9 @@ public:
 	uint8_t _330[0xC];
 	uint32_t nIsRagdolled; // +33C
 	uint32_t nTimeRagdolled; // +340
-	uint8_t _344[0x48];
+	uint8_t _344[0x8];
+	uint32_t nIsOutOfTrack; // +34C
+	uint8_t _350[0x3C];
 	FO2WString sPlayerName; // +38C
 	uint8_t _3A8[0x9C];
 	uint32_t nCurrentSplit; // +444
