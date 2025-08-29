@@ -66,8 +66,12 @@ public:
 	static inline uintptr_t IsKeyJustPressed_call = 0x4F16C0;
 	int __attribute__((naked)) __thiscall IsKeyJustPressed(int key) {
 		__asm__ (
-			"mov ebx, ecx\n\t"
-			"jmp %0\n\t"
+			"push ebx\n\t"
+			"mov ebx, ecx\n\t" // this
+			"push dword ptr [esp+0x8]\n\t"
+			"call %0\n\t"
+			"pop ebx\n\t"
+			"ret 4\n\t"
 				:
 				:  "m" (IsKeyJustPressed_call)
 		);
