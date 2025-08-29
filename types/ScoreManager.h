@@ -31,7 +31,10 @@ public:
 	uint32_t nNumLaps; // +C
 	uint8_t _10[0x8];
 	uint32_t nHideRaceHUD; // +18
-	uint8_t _1C[0x58];
+	uint8_t _1C[0x8];
+	uint32_t nStuntPlayerId; // +24
+	uint32_t nStuntRoundId; // +28
+	uint8_t _2C[0x48];
 	PlayerScoreRace** aScores; // +74
 };
 auto& pScoreManager = *(ScoreManager***)0x6C5238;

@@ -106,9 +106,19 @@ void DrawStringFO2_Small(const tNyaStringData& data, const std::string& name) {
 	DrawStringFO2(data, converter.from_bytes(name).c_str(), "FontMenuSmall");
 }
 
+void DrawStringFO2_Ingame10(const tNyaStringData& data, const std::string& name) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame10");
+}
+
 void DrawStringFO2_Ingame12(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame12");
+}
+
+void DrawStringFO2_Ingame18(const tNyaStringData& data, const std::string& name) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame18");
 }
 
 void DrawStringFO2_Ingame24(const tNyaStringData& data, const std::string& name) {
