@@ -23,3 +23,5 @@ void __attribute__((naked)) __fastcall FO2MatrixToQuat(float* matrix, float* qua
 			: "m" (FO2MatrixToQuat_call)
 	);
 }
+
+auto FO2MatrixInvert = (void(__thiscall*)(float* dst, float* src))0x501CD0;

@@ -3,8 +3,11 @@ class Player;
 enum class eCarFixPart : uint32_t {
 	BODY = 0,
 	ENGINE = 1,
+	UNK_2 = 2,
+	UNK_3 = 3,
 	WHEELS = 4,
 	SUSPENSION = 5,
+	UNK_6 = 6,
 	WINDOWS = 7,
 	LIGHTS = 8,
 };
@@ -38,7 +41,9 @@ public:
 	float fNitroAcceleration; // +10C
 	float fNitro; // +110
 	float fMaxNitro; // +114
-	uint8_t _118[0x14];
+	uint8_t _118[0x8];
+	float fHealth; // +120 responsible for engine fire
+	uint8_t _124[0x8];
 	float fMass; // +12C
 
 	static inline auto GetEngineSpeed = (float(__fastcall*)(uint32_t fExhaustPeakRpm, Engine*, float fIdleRpm))0x431D10;
@@ -49,7 +54,9 @@ class Gearbox {
 public:
 	uint8_t _0[0x10];
 	CarPerformance* pPerformance; // +10
-	uint8_t _14[0x40];
+	uint8_t _14[0x2C];
+	int32_t nCurrentGear; // +40
+	uint8_t _44[0x10];
 	uint32_t nNumGears; // +54
 	float fGearRRatio; // +58
 	float fGearNRatio; // +5C
