@@ -49,6 +49,36 @@ enum eTrack {
 	TRACK_CLOWN = 49,
 };
 
+enum eCar {
+	// fo1 bronze
+	CAR_PEPPER		=  3,
+	CAR_BLOCKER		= 12,
+	CAR_GRINDER		=  8,
+	CAR_BLOCKHEAD	=  9,
+	CAR_BULLET		= 15,
+
+	// fo1 silver
+	CAR_OVERRUNNER	=  4,
+	CAR_SLIDER		= 11,
+	CAR_ROADKING	= 10,
+	CAR_FASTHAMMER	=  6,
+	CAR_SPEEDEVIL	=  1,
+
+	// fo1 gold
+	CAR_THUNDERBOLT	=  5,
+	CAR_TRASHER		=  7,
+	CAR_MACHINE		= 14,
+	CAR_BONECRACKER	= 13,
+	CAR_RANKER1		= 16,
+	CAR_BLADE		=  2,
+
+	// retro demo
+	CAR_RETROROADKING	= 151,
+	CAR_RETROSPEEDEVIL	= 152,
+	CAR_RETROBEETLE		= 153,
+	CAR_RETROSLIDER		= 154
+};
+
 enum class eGameMode : uint32_t {
 	SINGLEPLAYER = 1,
 	HOST = 2,
