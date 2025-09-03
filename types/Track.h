@@ -12,7 +12,7 @@ static_assert(sizeof(Minimap) == 0x160);
 // vertex 2 0000D935 (+6)
 // vertex 3 0000D97D (+9)
 // +9 7D +A D9 +B 00
-struct __attribute__((packed)) tCollisionIndex {
+struct __attribute__((packed)) tCollisionPoly {
 	struct tInt24 {
 		uint8_t data[3];
 
@@ -46,11 +46,6 @@ struct __attribute__((packed)) tCollisionIndex {
 	tInt24 nVertex3; // +9
 };
 
-struct tCollisionVertex {
-	float fPosition[3]; // +0
-	uint16_t fMultipliers[2]; // +C * 0.000015259022
-};
-
 struct tCollisionRegion {
 	// v77 = ((nFlags >> 5) & 0x7F) + 1
 	// v24 = v76 + 12 * (nFlags >> 12);
@@ -64,14 +59,45 @@ struct tCollisionRegion {
 	// and 00000003
 
 	// first byte is 3 bytes
-	struct tCollisionRegionFlags {
-		uint8_t indexCount : 3;
-		uint8_t hasIndices : 1; // (v20 & 0x10) != 0 otherwise used as next region index
-		uint8_t unk1 : 4;
-		uint16_t index;
-		uint8_t unk2;
+	struct __attribute__((packed)) tFlags {
+		uint32_t value;
+
+		int GetPolyCount() {
+			return ((value >> 5) & 0x7F) + 1;
+		}
+
+		bool HasPolys() {
+			return (value & 0x10) != 0;
+		}
+
+		int GetIndex() {
+			return value >> 12;
+		}
+
+		void SetPolyCount(int i) {
+			if (i <= 0) return;
+			value |= ((i - 1) << 5) & 0x7F;
+		}
+
+		void SetHasPolys(bool b) {
+			if (b) {
+				value |= 0x10;
+			}
+			else {
+				value &= ~0x10;
+			}
+		}
+
+		void SetIndex(int i) {
+			value |= i << 12;
+		}
 	} nFlags;
-	uint16_t nExtents[6]; // 4 6 8 10 12 14
+	int16_t nXPosition;
+	int16_t nXSize;
+	int16_t nYPosition;
+	int16_t nYSize;
+	int16_t nZPosition;
+	int16_t nZSize;
 };
 
 class TrackCollision {
@@ -82,9 +108,9 @@ public:
 	float fCoordMultipliersInv2[3]; // +24 doesn't seem to do anything..? it is read though
 	float fWorldCenter[3]; // +30 never seems to be read in-game?
 	float fWorldSize[3]; // +3C never seems to be read in-game?
-	tCollisionVertex* aVertices; // +48
+	float* aVertices; // +48
 	tCollisionRegion* aRegions; // +4C
-	tCollisionIndex* aIndices; // +50
+	tCollisionPoly* aPolys; // +50
 	uint32_t nValue1; // +54
 };
 static_assert(sizeof(TrackCollision) == 0x58);
