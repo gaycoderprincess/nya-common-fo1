@@ -8,6 +8,87 @@ public:
 };
 static_assert(sizeof(Minimap) == 0x160);
 
+// vertex 1 0000D939 (+3)
+// vertex 2 0000D935 (+6)
+// vertex 3 0000D97D (+9)
+// +9 7D +A D9 +B 00
+struct __attribute__((packed)) tCollisionIndex {
+	struct tInt24 {
+		uint8_t data[3];
+
+		const uint32_t Get() {
+			uint32_t value = data[0];
+			value += data[1] * 256;
+			value += data[2] * 65536;
+			return value;
+		}
+		void Set(const uint32_t value) {
+			memcpy(data, &value, 3);
+		}
+	};
+
+	// unknownid:
+	// byte_68BDF4[v7 >> 11]
+	// byte_68BDF4[(v7 >> 6) & 0x1F]
+
+	// nFlags:
+	// trees 1
+	// objects 3
+	// water 6
+	// ground 27
+
+	uint8_t nFlags; // +0
+	uint8_t nMaterial : 6; // +1
+	uint8_t nUnk2 : 2; // +1
+	uint8_t nUnk3; // +2
+	tInt24 nVertex1; // +3
+	tInt24 nVertex2; // +6
+	tInt24 nVertex3; // +9
+};
+
+struct tCollisionVertex {
+	float fPosition[3]; // +0
+	uint16_t fMultipliers[2]; // +C * 0.000015259022
+};
+
+struct tCollisionRegion {
+	// v77 = ((nFlags >> 5) & 0x7F) + 1
+	// v24 = v76 + 12 * (nFlags >> 12);
+
+	// 0887007B
+	// gets me 00000004 for count and 8870 for id
+	// 23A40020 23AA6560
+
+	// 0886C07B
+	// shr 00443603
+	// and 00000003
+
+	// first byte is 3 bytes
+	struct tCollisionRegionFlags {
+		uint8_t indexCount : 3;
+		uint8_t hasIndices : 1; // (v20 & 0x10) != 0 otherwise used as next region index
+		uint8_t unk1 : 4;
+		uint16_t index;
+		uint8_t unk2;
+	} nFlags;
+	uint16_t nExtents[6]; // 4 6 8 10 12 14
+};
+
+class TrackCollision {
+public:
+	float fCoordMultipliers1[3]; // +0 doesn't seem to do anything?
+	float fCoordMultipliers2[3]; // +C makes collisions wonky if changed lower
+	float fCoordMultipliersInv1[3]; // +18 used for shadows and body collision
+	float fCoordMultipliersInv2[3]; // +24 doesn't seem to do anything..? it is read though
+	float fWorldCenter[3]; // +30 never seems to be read in-game?
+	float fWorldSize[3]; // +3C never seems to be read in-game?
+	tCollisionVertex* aVertices; // +48
+	tCollisionRegion* aRegions; // +4C
+	tCollisionIndex* aIndices; // +50
+	uint32_t nValue1; // +54
+};
+static_assert(sizeof(TrackCollision) == 0x58);
+
 class Track {
 public:
 	struct tSplitpoint {
@@ -24,7 +105,9 @@ public:
 	};
 	static_assert(sizeof(tStartpoint) == 0x50);
 
-	uint8_t _0[0x1168];
+	uint8_t _0[0x20];
+	TrackCollision* pCollision; // +20
+	uint8_t _24[0x1144];
 	tSplitpoint aSplitpoints[32]; // +1168
 	uint8_t _18E8[0x780];
 	uint32_t nNumSplitpoints; // +2068
