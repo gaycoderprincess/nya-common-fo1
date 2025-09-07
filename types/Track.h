@@ -149,7 +149,11 @@ public:
 
 	uint8_t _0[0x20];
 	TrackCollision* pCollision; // +20
-	uint8_t _24[0x1144];
+	uint8_t _24[0x10DC];
+	FO2String sGFXSetPath; // +1100
+	FO2String sTrackPath; // +111C
+	FO2String sStagePath; // +1138
+	uint8_t _1154[0x14];
 	tSplitpoint aSplitpoints[32]; // +1168
 	uint8_t _18E8[0x780];
 	uint32_t nNumSplitpoints; // +2068
