@@ -38,12 +38,19 @@ struct __attribute__((packed)) tCollisionPoly {
 	// ground 27
 
 	uint8_t nFlags; // +0
-	uint8_t nMaterial : 6; // +1
-	uint8_t nUnk2 : 2; // +1
-	uint8_t nUnk3; // +2
+	uint16_t nMaterialAndOtherStuff; // +1
 	tInt24 nVertex1; // +3
 	tInt24 nVertex2; // +6
 	tInt24 nVertex3; // +9
+
+	int GetMaterial() {
+		return nMaterialAndOtherStuff & 0x1F;
+	}
+
+	void SetMaterial(int i) {
+		nMaterialAndOtherStuff &= ~0x1F;
+		nMaterialAndOtherStuff |= i & 0x1F;
+	}
 };
 
 struct tCollisionRegion {
@@ -61,6 +68,15 @@ struct tCollisionRegion {
 	// first byte is 3 bytes
 	struct __attribute__((packed)) tFlags {
 		uint32_t value;
+
+		int GetUnknownFlag() {
+			return (*(uint8_t*)&value) & 0xF;
+		}
+
+		void SetUnknownFlag(int i) {
+			*(uint8_t*)&value &= ~0xF;
+			*(uint8_t*)&value |= i & 0xF;
+		}
 
 		int GetPolyCount() {
 			return ((value >> 5) & 0x7F) + 1;
