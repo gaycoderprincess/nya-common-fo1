@@ -193,6 +193,23 @@ public:
 };
 static_assert(sizeof(TireDynamics) == 0x4C);
 
+class DamageEntity {
+public:
+	uint8_t _0[0xA0];
+	uint32_t nEntityType; // +A0 4 is car
+	uint8_t _A4[0xEC];
+	void* pBasePtr; // +190
+};
+
+class DamageData {
+public:
+	uint8_t _0[0x24];
+	float fImpactForce; // +24
+	float fImpactForce2; // +28
+	uint8_t _2C[0x8];
+	DamageEntity* pEntity; // +34
+};
+
 class Car {
 public:
 	int aObjectsSmashed[10]; // +0

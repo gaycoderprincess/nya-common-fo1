@@ -2,6 +2,8 @@
 
 namespace NyaFO2Hooks {
 	std::vector<void(*)()> aEndSceneFuncs;
+	std::vector<void(*)()> aPresentFuncs;
+	std::vector<void(*)()> aPostPresentFuncs;
 	std::vector<void(*)()> aD3DResetFuncs;
 	std::vector<void(*)(HWND, UINT, WPARAM, LPARAM)> aWndProcFuncs;
 	std::vector<void(*)(void*)> aScriptFuncs;
@@ -12,6 +14,18 @@ namespace NyaFO2Hooks {
 			func();
 		}
 		return EndSceneOrig(a1);
+	}
+
+	auto PresentOrig = (HRESULT(__thiscall*)(void*))nullptr;
+	HRESULT __fastcall PresentHook(void* a1) {
+		for (auto& func : aPresentFuncs) {
+			func();
+		}
+		auto result = PresentOrig(a1);
+		for (auto& func : aPostPresentFuncs) {
+			func();
+		}
+		return result;
 	}
 
 	auto D3DResetOrig = (void(*)())nullptr;
@@ -42,6 +56,8 @@ namespace NyaFO2Hooks {
 		if (!EndSceneOrig) {
 			EndSceneOrig = (HRESULT(__thiscall*)(void*))(*(uintptr_t*)0x667954);
 			NyaHookLib::Patch(0x667954, &EndSceneHook);
+			PresentOrig = (HRESULT(__thiscall*)(void*))(*(uintptr_t*)0x667938);
+			NyaHookLib::Patch(0x667938, &PresentHook);
 			D3DResetOrig = (void(*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x5055AD, &D3DResetHook);
 		}
 	}
