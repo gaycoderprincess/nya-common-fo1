@@ -20,7 +20,9 @@ public:
 	uint32_t nTimeRagdolled; // +340
 	uint8_t _344[0x8];
 	uint32_t nIsOutOfTrack; // +34C
-	uint8_t _350[0x3C];
+	uint8_t _350[0x10];
+	float fLastValidPosition[3]; // +360
+	uint8_t _36C[0x20];
 	FO2WString sPlayerName; // +38C
 	uint8_t _3A8[0x9C];
 	uint32_t nCurrentSplit; // +444
