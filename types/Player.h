@@ -24,7 +24,9 @@ public:
 	float fLastValidPosition[3]; // +360
 	uint8_t _36C[0x20];
 	FO2WString sPlayerName; // +38C
-	uint8_t _3A8[0x9C];
+	Sector* pCurrentSector; // +3A8
+	Sector* pLastSector; // +3AC
+	uint8_t _3B0[0x94];
 	uint32_t nCurrentSplit; // +444
 	uint32_t nCurrentLap; // +448
 	uint8_t _44C[0x3C];

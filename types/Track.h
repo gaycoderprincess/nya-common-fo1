@@ -166,6 +166,16 @@ public:
 };
 auto& pEnvironment = *(Track**)0x6C004C;
 
+class Sector {
+public:
+	uint8_t _0[0x80];
+	float fSpeedLimit; // +80
+	uint8_t _84[0x10];
+	uint32_t nCanReset; // +94
+	uint8_t _98[0x4];
+};
+static_assert(sizeof(Sector) == 0x9C);
+
 class TrackAI {
 public:
 	struct tSplineData {
@@ -175,5 +185,7 @@ public:
 	tSplineData* pAIRaceLine; // +0
 	tSplineData* pAIBorderLineLeft; // +4
 	tSplineData* pAIBorderLineRight; // +8
+	uint32_t nNumSectors; // +C
+	Sector aSectors[0]; // +10
 };
 auto& pTrackAI = *(TrackAI**)0x6C5220;
