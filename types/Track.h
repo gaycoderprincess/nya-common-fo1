@@ -1,8 +1,8 @@
 class Minimap {
 public:
 	uint8_t _0[0x140];
-	float fMapTopLeft[2]; // +140
-	float fMapBottomRight[2]; // +148
+	float fWorldTopLeft[2]; // +140
+	float fWorldBottomRight[2]; // +148
 	float fScreenPos[2]; // +150
 	float fScreenSize[2]; // +158
 };
