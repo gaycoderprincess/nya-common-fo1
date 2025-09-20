@@ -11,9 +11,17 @@ public:
 
 class DeviceD3d {
 public:
+	enum eRenderState {
+		RENDERSTATE_CULLMODE = 1,
+		RENDERSTATE_ZWRITEENABLE = 2,
+		RENDERSTATE_ZFUNC = 3,
+		RENDERSTATE_ALPHAFUNC = 4,
+	};
 
 	static inline auto& pD3DDevice = *(IDirect3DDevice9**)0x6C00D8;
 	static inline auto& hWnd = *(HWND*)0x6C00EC;
+
+	static inline auto& nDesiredCullMode = *(int*)0x6C4954;
 
 	static inline auto CreateTextureFromFile = (DevTexture*(__thiscall*)(DeviceD3d*, DevTexture*, const char* path, uint32_t flags))0x50B060;
 	static inline auto CreateTextureFromMemory = (DevTexture*(__thiscall*)(DeviceD3d*, DevTexture*, uint8_t* data, uint32_t dataSize, uint32_t flags))0x50B410;
@@ -42,7 +50,7 @@ public:
 	virtual void _vf21() = 0;
 	virtual void _vf22() = 0;
 	virtual void _vf23() = 0;
-	virtual void _vf24() = 0;
+	virtual void SetRenderState(int state, int value) = 0;
 	virtual void _vf25() = 0;
 	virtual void _vf26() = 0;
 	virtual void _vf27() = 0;
