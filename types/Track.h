@@ -5,6 +5,23 @@ public:
 	float fWorldBottomRight[2]; // +148
 	float fScreenPos[2]; // +150
 	float fScreenSize[2]; // +158
+
+	static inline uintptr_t ctor_call = 0x477E10;
+	void __attribute__((naked)) ctor() {
+		__asm__ (
+			"pushad\n\t"
+			"mov esi, ecx\n\t"
+			"call %0\n\t"
+			"popad\n\t"
+			"ret\n\t"
+				:
+				:  "m" (ctor_call)
+		);
+	}
+
+	Minimap() {
+		ctor();
+	}
 };
 static_assert(sizeof(Minimap) == 0x160);
 
