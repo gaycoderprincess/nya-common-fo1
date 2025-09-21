@@ -24,6 +24,8 @@
 #include "types/CameraManager.h"
 #include "types/IngameMenu.h"
 
+auto FO2Malloc = (void*(__cdecl*)(size_t))0x5EB023;
+
 auto gPalette = (uint32_t*)0x6C44E8;
 
 #include "fo1helpers.h"

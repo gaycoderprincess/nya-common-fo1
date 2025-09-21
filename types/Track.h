@@ -18,10 +18,6 @@ public:
 				:  "m" (ctor_call)
 		);
 	}
-
-	Minimap() {
-		ctor();
-	}
 };
 static_assert(sizeof(Minimap) == 0x160);
 
