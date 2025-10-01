@@ -22,7 +22,11 @@ public:
 	uint8_t _4[0x10];
 	FO2Vector<Player*> aPlayers; // +14
 	FO2Vector<Player*> aLocalPlayers; // +20
-	uint8_t _2C[0x1E220];
+	uint8_t _2C[0x1E210];
+	int32_t nLevelId; // +1E23C
+	int32_t nStageId; // +1E240
+	int32_t nWeatherId; // +1E244
+	uint8_t _1E248[0x4];
 	int32_t nRaceTime; // +1E24C
 	uint8_t _1E250[0xC];
 	uint32_t nIsInReplay; // +1E25C

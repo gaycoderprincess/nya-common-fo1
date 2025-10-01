@@ -162,11 +162,21 @@ public:
 
 	uint8_t _0[0x20];
 	TrackCollision* pCollision; // +20
-	uint8_t _24[0x10DC];
+	uint8_t _24[0xCFC];
+	float fAmbientColor[4]; // +D20
+	float fAmbientBlack[4]; // +D30
+	float fSunColor[4]; // +D40
+	float fSpecularColor[4]; // +D50
+	uint8_t _D60[0x84];
+	float fMaxVisibility; // +DE4
+	float fMaxVisibilitySplit; // +DE8
+	uint8_t _DEC[0x314];
 	FO2String sGFXSetPath; // +1100
 	FO2String sTrackPath; // +111C
 	FO2String sStagePath; // +1138
-	uint8_t _1154[0x14];
+	uint8_t _1154[0xC];
+	uint32_t nLevelId; // +1160
+	uint32_t nStageId; // +1164
 	tSplitpoint aSplitpoints[32]; // +1168
 	uint8_t _18E8[0x780];
 	uint32_t nNumSplitpoints; // +2068
