@@ -99,7 +99,9 @@ public:
 	uint32_t nCarType; // +78 zero-indexed
 	uint32_t nCarClass; // +7C
 	uint32_t nCarSkin; // +80
-	uint8_t _84[0x10];
+	uint32_t nCharacterType; // +84
+	uint8_t _88[0x8];
+	uint32_t nAutoTransmission; // +90
 	uint32_t nEasyDifficulty; // +94
 	uint32_t nCurrentClass; // +98
 	uint8_t _9C[0x8];
