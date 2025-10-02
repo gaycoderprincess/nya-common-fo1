@@ -1,4 +1,4 @@
-class PlayerScoreRace {
+class PlayerScore {
 public:
 	uint32_t nPlayerId; // +4
 	int32_t nPosition; // +8
@@ -35,22 +35,21 @@ public:
 	uint32_t nStuntPlayerId; // +24
 	uint32_t nStuntRoundId; // +28
 	uint8_t _2C[0x48];
-	PlayerScoreRace** aScores; // +74
+	PlayerScore** aScores; // +74
 };
 auto& pScoreManager = *(ScoreManager***)0x6C5238;
 ScoreManager* GetScoreManager() {
 	return *pScoreManager;
 }
 
-template<typename T>
-T* GetPlayerScore(int playerId) {
+PlayerScore* GetPlayerScore(int playerId) {
 	if (!pScoreManager) return nullptr;
 
 	auto scoreManager = GetScoreManager();
 	for (int i = 0; i < scoreManager->nNumPlayers; i++) {
 		auto score = scoreManager->aScores[i];
 		if (score->nPlayerId + 1 == playerId) {
-			return (T*)score;
+			return score;
 		}
 	}
 	return nullptr;

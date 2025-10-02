@@ -223,7 +223,22 @@ public:
 	float fTireTurnAngleOut; // +78
 	FO2String sName; // +7C
 	FO2String sFolderPath; // +98
-	uint8_t _B4[0x9C];
+#ifdef NYA_MATH_H
+	NyaVec3 vCollisionFullCenter; // +B4
+	NyaVec3 vCollisionFullRadius; // +C0
+	NyaVec3 vCollisionBottomCenter; // +CC
+	NyaVec3 vCollisionBottomRadius; // +D8
+	NyaVec3 vCollisionTopCenter; // +E4
+	NyaVec3 vCollisionTopRadius; // +F0
+#else
+	float vCollisionFullCenter[3]; // +B4
+	float vCollisionFullRadius[3]; // +C0
+	float vCollisionBottomCenter[3]; // +CC
+	float vCollisionBottomRadius[3]; // +D8
+	float vCollisionTopCenter[3]; // +E4
+	float vCollisionTopRadius[3]; // +F0
+#endif
+	uint8_t _FC[0x54];
 	float mMatrix[4*4]; // +150 used as ptr for collision checks
 	uint8_t _190[0xB0];
 	float qQuaternion[4]; // +240
