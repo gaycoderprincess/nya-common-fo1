@@ -21,6 +21,7 @@ public:
 		);
 	}
 };
+static_assert(sizeof(FO2String) == 0x1C);
 
 class FO2WString {
 public:
@@ -35,3 +36,4 @@ public:
 		return string;
 	}
 };
+static_assert(sizeof(FO2WString) == 0x1C);
