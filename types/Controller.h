@@ -44,7 +44,7 @@ public:
 	virtual void _vf4() = 0;
 	virtual void _vf5() = 0;
 	virtual void _vf6() = 0;
-	virtual void _vf7() = 0;
+	virtual bool IsGearSwitchingAvailable() = 0;
 	virtual void _vf8() = 0;
 	virtual bool _vf_IsMenuInputJustPressed(int input) = 0;
 	virtual bool _vf_IsGameInputJustPressed(int input) = 0;

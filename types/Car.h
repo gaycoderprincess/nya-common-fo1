@@ -55,15 +55,16 @@ class Gearbox {
 public:
 	uint8_t _4[0xC];
 	CarPerformance* pPerformance; // +10
-	float fCurrentGearInertia; // +14
-	float fInvCurrentGearInertia; // +18
-	float fCurrentGearRatio; // +1C
-	float fInvCurrentGearRatio; // +20
+	float fGearInertia; // +14
+	float fInvGearInertia; // +18
+	float fGearRatio; // +1C
+	float fInvGearRatio; // +20
 	uint8_t _24[0x1C];
 	int32_t nCurrentGear; // +40
-	uint8_t _44[0x8];
+	uint8_t _44[0x4];
+	int32_t nCurrentGear2; // +48
 	uint32_t nClutchState; // +4C
-	float fCurrentClutchTime; // +50
+	float fClutchTimer; // +50
 	uint32_t nNumGears; // +54
 	float fGearRRatio; // +58
 	float fGearNRatio; // +5C
@@ -116,7 +117,7 @@ public:
 	virtual void _vf0() {};
 	virtual void _vf1() {};
 	virtual void _vf2() {};
-	virtual void Process(float time) {}; // updates clutch and shifts gear
+	virtual void Process(float time) {}; // updates clutch
 };
 static_assert(sizeof(Gearbox) == 0xC0);
 

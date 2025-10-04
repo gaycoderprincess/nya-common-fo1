@@ -3,7 +3,7 @@ public:
 	uint8_t _4[0x2AC];
 	Controller* pController; // +2B0
 	uint32_t nAutoTransmission; // +2B4
-	uint32_t nAutoTransmissionThisFrame; // +2B8
+	uint32_t nForceAutoTransmission; // +2B8
 	uint32_t nEasyDifficulty; // +2BC
 	Car* pCar; // +2C0
 	uint32_t nCarId; // +2C4
@@ -31,7 +31,9 @@ public:
 	uint8_t _3B0[0x94];
 	uint32_t nCurrentSplit; // +444
 	uint32_t nCurrentLap; // +448
-	uint8_t _44C[0x3C];
+	uint8_t _44C[0x20];
+	int32_t nGearShift; // +46C
+	uint8_t _470[0x18];
 	float fOutputSteerAngle; // +488
 	float fGasPedal; // +48C
 	float fBrakePedal; // +490
