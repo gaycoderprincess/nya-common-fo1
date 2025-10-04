@@ -41,7 +41,8 @@ public:
 	float fNitroAcceleration; // +10C
 	float fNitro; // +110
 	float fMaxNitro; // +114
-	uint8_t _118[0x8];
+	uint8_t _118[0x4];
+	float fEngineRpm; // +11C
 	float fHealth; // +120 responsible for engine fire
 	uint8_t _124[0x8];
 	float fMass; // +12C
@@ -52,7 +53,7 @@ static_assert(sizeof(Engine) == 0x130);
 
 class Gearbox {
 public:
-	uint8_t _0[0x10];
+	uint8_t _4[0xC];
 	CarPerformance* pPerformance; // +10
 	float fCurrentGearInertia; // +14
 	float fInvCurrentGearInertia; // +18
@@ -60,7 +61,9 @@ public:
 	float fInvCurrentGearRatio; // +20
 	uint8_t _24[0x1C];
 	int32_t nCurrentGear; // +40
-	uint8_t _44[0x10];
+	uint8_t _44[0x8];
+	uint32_t nClutchState; // +4C
+	float fCurrentClutchTime; // +50
 	uint32_t nNumGears; // +54
 	float fGearRRatio; // +58
 	float fGearNRatio; // +5C
@@ -78,20 +81,42 @@ public:
 	float fGear4Inertia; // +8C
 	float fGear5Inertia; // +90
 	float fGear6Inertia; // +94
-	uint8_t _98[0x20];
+	uint8_t _98[0x8];
+	float fGear1Upshift; // +A0 kmh
+	float fGear2Upshift; // +A4 kmh
+	float fGear3Upshift; // +A8 kmh
+	float fGear4Upshift; // +AC kmh
+	float fGear5Upshift; // +B0 kmh
+	float fGear6Upshift; // +B4 kmh
 	float fClutchEngageTime; // +B8
 	float fClutchReleaseTime; // +BC
 
-	static inline uintptr_t ChangeGear_call = 0x4339C0;
-	void __attribute__((naked)) __fastcall ChangeGear(int gear) {
+	static inline uintptr_t ChangeToGear_call = 0x4339C0;
+	void __attribute__((naked)) __fastcall ChangeToGear(int gear) {
 		__asm__ (
 			"mov eax, ecx\n\t"
 			"mov ecx, edx\n\t"
 			"jmp %0\n\t"
 				:
-				:  "m" (ChangeGear_call)
+				:  "m" (ChangeToGear_call)
 		);
 	}
+
+	static inline uintptr_t ShiftGear_call = 0x433A10;
+	void __attribute__((naked)) __fastcall ShiftGear(int gear) {
+		__asm__ (
+			"mov esi, ecx\n\t"
+			"mov ecx, edx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (ShiftGear_call)
+		);
+	}
+
+	virtual void _vf0() {};
+	virtual void _vf1() {};
+	virtual void _vf2() {};
+	virtual void Process(float time) {}; // updates clutch and shifts gear
 };
 static_assert(sizeof(Gearbox) == 0xC0);
 

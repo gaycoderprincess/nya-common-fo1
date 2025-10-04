@@ -3,7 +3,7 @@ public:
 	uint8_t _4[0x2AC];
 	Controller* pController; // +2B0
 	uint32_t nAutoTransmission; // +2B4
-	uint8_t _2B8[0x4];
+	uint32_t nAutoTransmissionThisFrame; // +2B8
 	uint32_t nEasyDifficulty; // +2BC
 	Car* pCar; // +2C0
 	uint32_t nCarId; // +2C4
