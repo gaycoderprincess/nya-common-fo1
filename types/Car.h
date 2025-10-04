@@ -54,7 +54,11 @@ class Gearbox {
 public:
 	uint8_t _0[0x10];
 	CarPerformance* pPerformance; // +10
-	uint8_t _14[0x2C];
+	float fCurrentGearInertia; // +14
+	float fInvCurrentGearInertia; // +18
+	float fCurrentGearRatio; // +1C
+	float fInvCurrentGearRatio; // +20
+	uint8_t _24[0x1C];
 	int32_t nCurrentGear; // +40
 	uint8_t _44[0x10];
 	uint32_t nNumGears; // +54
@@ -77,6 +81,17 @@ public:
 	uint8_t _98[0x20];
 	float fClutchEngageTime; // +B8
 	float fClutchReleaseTime; // +BC
+
+	static inline uintptr_t ChangeGear_call = 0x4339C0;
+	void __attribute__((naked)) __fastcall ChangeGear(int gear) {
+		__asm__ (
+			"mov eax, ecx\n\t"
+			"mov ecx, edx\n\t"
+			"jmp %0\n\t"
+				:
+				:  "m" (ChangeGear_call)
+		);
+	}
 };
 static_assert(sizeof(Gearbox) == 0xC0);
 
