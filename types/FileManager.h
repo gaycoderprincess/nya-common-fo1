@@ -6,9 +6,8 @@ public:
 	static inline uintptr_t AddBFSFile_call = 0x4EEE50;
 	static int __attribute__((naked)) __fastcall AddBFSFile(const char* fileName) {
 		__asm__ (
-				"mov eax, ecx\n\t"
-				"call %0\n\t"
-				"ret\n\t"
+			"mov eax, ecx\n\t"
+			"jmp %0\n\t"
 				:
 				:  "m" (AddBFSFile_call)
 		);
@@ -103,5 +102,16 @@ bool __attribute__((naked)) __fastcall ParseGameDDSFromMemory(uint8_t* header, v
 		"jmp %0\n\t"
 			:
 			:  "m" (ParseGameDDS2_jmp)
+	);
+}
+
+uintptr_t DoesFileExist_call = 0x4EF1A0;
+bool __attribute__((naked)) __fastcall DoesFileExist(const char* fileName, int flags = 0) {
+	__asm__ (
+		"mov eax, ecx\n\t"
+		"mov ecx, edx\n\t"
+		"jmp %0\n\t"
+			:
+			:  "m" (DoesFileExist_call)
 	);
 }

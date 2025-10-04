@@ -1,10 +1,5 @@
 #include <format>
 
-bool DoesFileExist(const char* path) {
-	int tmp[2];
-	return BfsManager::DoesFileExist(pBfsManager, path, tmp);
-}
-
 int GetNumSkinsForCar(int carId) {
 	auto path = std::format("data/cars/car_{}/skin", carId);
 	int i;
