@@ -91,37 +91,47 @@ float GetStringWidthFO2(tNyaStringData data, const wchar_t* string, const char* 
 	return w;
 }
 
-void DrawStringFO2(const tNyaStringData& data, const std::string& name) {
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	DrawStringFO2(data, converter.from_bytes(name).c_str(), "FontMenuLarge");
-}
-
-void DrawStringFO2_Small(const tNyaStringData& data, const std::string& name) {
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	DrawStringFO2(data, converter.from_bytes(name).c_str(), "FontMenuSmall");
-}
-
-void DrawStringFO2_Ingame10(const tNyaStringData& data, const std::string& name) {
+void DrawStringFO2_Regular10(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame10");
 }
 
-void DrawStringFO2_Ingame12(const tNyaStringData& data, const std::string& name) {
+void DrawStringFO2_Condensed12(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame12");
 }
 
-void DrawStringFO2_Ingame18(const tNyaStringData& data, const std::string& name) {
+void DrawStringFO2_Italic14(const tNyaStringData& data, const std::string& name) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame14");
+}
+
+void DrawStringFO2_Regular18(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame18");
 }
 
-void DrawStringFO2_Ingame24(const tNyaStringData& data, const std::string& name) {
+void DrawStringFO2_Regular20(const tNyaStringData& data, const std::string& name) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame20");
+}
+
+void DrawStringFO2_Italic24(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame24");
 }
 
-float GetStringWidthFO2_Ingame12(const tNyaStringData& data, const std::string& name) {
+void DrawStringFO2_Italic36(const tNyaStringData& data, const std::string& name) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame36");
+}
+
+void DrawStringFO2_Title14(const tNyaStringData& data, const std::string& name) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Title14");
+}
+
+float GetStringWidthFO2_Condensed12(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	return GetStringWidthFO2(data, converter.from_bytes(name).c_str(), "Ingame12");
 }

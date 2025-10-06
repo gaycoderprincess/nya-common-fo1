@@ -95,9 +95,12 @@ public:
 	static inline uintptr_t ChangeToGear_call = 0x4339C0;
 	void __attribute__((naked)) __fastcall ChangeToGear(int gear) {
 		__asm__ (
+			"pushad\n\t"
 			"mov eax, ecx\n\t"
 			"mov ecx, edx\n\t"
-			"jmp %0\n\t"
+			"call %0\n\t"
+			"popad\n\t"
+			"ret\n\t"
 				:
 				:  "m" (ChangeToGear_call)
 		);
@@ -106,9 +109,12 @@ public:
 	static inline uintptr_t ShiftGear_call = 0x433A10;
 	void __attribute__((naked)) __fastcall ShiftGear(int gear) {
 		__asm__ (
+			"pushad\n\t"
 			"mov esi, ecx\n\t"
 			"mov ecx, edx\n\t"
-			"jmp %0\n\t"
+			"call %0\n\t"
+			"popad\n\t"
+			"ret\n\t"
 				:
 				:  "m" (ShiftGear_call)
 		);
