@@ -15,7 +15,7 @@ public:
 
 	static inline auto GetFont = (Font*(__stdcall*)(void*, const char*))0x4396A0;
 	static inline auto Display = (void(__thiscall*)(Font*, float, float, int, float, const wchar_t*))0x4F0D00;
-	//static inline auto GetWidth = (float(*)(Font*, const wchar_t*, ...))0x54F7A0;
+	static inline auto GetWidth = (float(*)(Font*, const wchar_t*, ...))0x4F1210;
 };
 
 struct tFontBak {
@@ -57,7 +57,7 @@ void DrawStringFO2(tNyaStringData data, const wchar_t* string, const char* font)
 	pFont->bXRightAlign = bak.bXRightAlign;
 }
 
-/*float GetStringWidthFO2(tNyaStringData data, const wchar_t* string, const char* font) {
+float GetStringWidthFO2(tNyaStringData data, const wchar_t* string, const char* font) {
 	auto pFont = Font::GetFont(*(void**)0x6C5240, font);
 
 	tFontBak bak;
@@ -88,13 +88,8 @@ void DrawStringFO2(tNyaStringData data, const wchar_t* string, const char* font)
 	pFont->bXRightAlign = bak.bXRightAlign;
 
 	w /= (double)nResX;
-	// adjust width if widescreen fix is installed
-	if (GetModuleHandleA("ZPatchFO2.asi")) {
-		w /= 4.0 / 3.0;
-		w *= (double)nResX / (double)nResY;
-	}
 	return w;
-}*/
+}
 
 void DrawStringFO2(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
@@ -126,7 +121,7 @@ void DrawStringFO2_Ingame24(const tNyaStringData& data, const std::string& name)
 	DrawStringFO2(data, converter.from_bytes(name).c_str(), "Ingame24");
 }
 
-/*float GetStringWidthFO2(const tNyaStringData& data, const std::string& name) {
+float GetStringWidthFO2_Ingame12(const tNyaStringData& data, const std::string& name) {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	return GetStringWidthFO2(data, converter.from_bytes(name).c_str(), "FontLarge");
-}*/
+	return GetStringWidthFO2(data, converter.from_bytes(name).c_str(), "Ingame12");
+}
