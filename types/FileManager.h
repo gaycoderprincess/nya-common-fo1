@@ -4,10 +4,13 @@ public:
 	static inline auto DoesFileExist = (bool(__thiscall*)(void*, const char*, int*))0x4F98D0;
 
 	static inline uintptr_t AddBFSFile_call = 0x4EEE50;
-	static int __attribute__((naked)) __fastcall AddBFSFile(const char* fileName) {
+	static void __attribute__((naked)) __fastcall AddBFSFile(const char* fileName) {
 		__asm__ (
+			"pushad\n\t"
 			"mov eax, ecx\n\t"
-			"jmp %0\n\t"
+			"call %0\n\t"
+			"popad\n\t"
+			"ret\n\t"
 				:
 				:  "m" (AddBFSFile_call)
 		);
@@ -88,8 +91,11 @@ static_assert(sizeof(File) == 0x28);
 uintptr_t ParseGameDDS_jmp = 0x509FE0;
 bool __attribute__((naked)) __fastcall ParseGameDDS(uint8_t* header, void*, DevTexture* pThis, File* pFile) {
 	__asm__ (
+		"pushad\n\t"
 		"mov eax, ecx\n\t"
-		"jmp %0\n\t"
+		"call %0\n\t"
+		"popad\n\t"
+		"ret\n\t"
 			:
 			:  "m" (ParseGameDDS_jmp)
 	);
@@ -98,8 +104,11 @@ bool __attribute__((naked)) __fastcall ParseGameDDS(uint8_t* header, void*, DevT
 uintptr_t ParseGameDDS2_jmp = 0x50A5C0;
 bool __attribute__((naked)) __fastcall ParseGameDDSFromMemory(uint8_t* header, void*, DevTexture* pThis, uint8_t* pFile) {
 	__asm__ (
+		"pushad\n\t"
 		"mov eax, ecx\n\t"
-		"jmp %0\n\t"
+		"call %0\n\t"
+		"popad\n\t"
+		"ret\n\t"
 			:
 			:  "m" (ParseGameDDS2_jmp)
 	);

@@ -32,8 +32,11 @@ public:
 	static inline uintptr_t DrawPressStart_call = 0x45AC50;
 	int __attribute__((naked)) __fastcall DrawPressStart() {
 		__asm__ (
+			"pushad\n\t"
 			"mov eax, ecx\n\t"
-			"jmp %0\n\t"
+			"call %0\n\t"
+			"popad\n\t"
+			"ret\n\t"
 				:
 				:  "m" (DrawPressStart_call)
 		);

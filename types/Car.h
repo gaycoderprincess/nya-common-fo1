@@ -394,10 +394,12 @@ public:
 	}
 
 	static inline uintptr_t Fix_call = 0x416B60;
-	int __attribute__((naked)) __fastcall FixPart(eCarFixPart part) {
+	void __attribute__((naked)) __fastcall FixPart(eCarFixPart part) {
 		__asm__ (
+			"pushad\n\t"
 			"mov eax, edx\n\t"
 			"call %0\n\t"
+			"popad\n\t"
 			"ret\n\t"
 				:
 				:  "m" (Fix_call)
