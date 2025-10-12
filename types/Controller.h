@@ -53,7 +53,7 @@ public:
 	virtual void _vf13() = 0;
 	virtual int _vf_IsInputJustPressed2(int input) = 0;
 	virtual int _vf_GetInputValue2(int input) = 0;
-	virtual float _vf_GetAnalogInput(int input) = 0;
+	virtual int _vf_GetAnalogInput(int input, float* out) = 0;
 };
 
 class InputManager {
