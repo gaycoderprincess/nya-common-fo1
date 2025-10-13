@@ -17,7 +17,8 @@ public:
 	uint32_t nPlayerId; // +324
 	uint32_t nPlayerType; // +328
 	uint32_t nStartPosition; // +32C
-	uint8_t _330[0xC];
+	uint8_t _330[0x8];
+	uint32_t nIsWreckedDerby; // +338
 	uint32_t nIsRagdolled; // +33C
 	uint32_t nTimeRagdolled; // +340
 	uint8_t _344[0x8];

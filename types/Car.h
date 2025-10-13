@@ -257,6 +257,14 @@ public:
 	DamageEntity* pEntity; // +34
 };
 
+class Object {
+public:
+	uint8_t _0[0x40];
+	float mMatrix[4*4]; // +40
+	uint8_t _80[0x4C];
+	FO2String sName; // +CC
+};
+
 class Car {
 public:
 	int aObjectsSmashed[10]; // +0
@@ -307,7 +315,9 @@ public:
 	float fSteerAngle; // +12B8
 	uint8_t _12BC[0x54];
 	TireDynamics TireDynamics[8]; // +1310
-	uint8_t _1570[0x964];
+	uint8_t _1570[0x710];
+	FO2Vector<Object*> aDummyObjects; // +1C80
+	uint8_t _1C8C[0x248];
 	float fRagdollVelocity; // +1ED4
 	uint8_t _1ED8[0x28];
 	uint32_t nIsRagdolled; // +1F00
@@ -415,6 +425,18 @@ public:
 				:
 				:  "m" (GetDerbyDamage_call)
 		);
+	}
+
+	Object* GetObjectByName(const char* name, bool throwError = false) {
+		for (int i = 0; i < aDummyObjects.GetSize(); i++) {
+			auto obj = aDummyObjects[i];
+			if (!strcmp(obj->sName.Get(), name)) return obj;
+		}
+		if (throwError) {
+			MessageBoxA(0, std::format("Cannot find required dummy object<{}>", name).c_str(), "Fatal error", MB_ICONERROR);
+			exit(0);
+		}
+		return nullptr;
 	}
 };
 static_assert(sizeof(Car) == 0x425C);
