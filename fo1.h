@@ -40,3 +40,72 @@ public:
 	static inline auto aValueTable = (int*)0x6BF370;
 	static inline auto Reset = (void(*)())0x501AC0;
 };
+
+struct tLineOfSightIn {
+	float vStart[3]; // +0
+	uint8_t _C[0x18];
+	float vDir[3]; // +24
+	uint8_t _30[0xC];
+	float fMaxDistance; // +3C
+	float fMinDistance; // +40
+	uint8_t _44[0x20];
+	void* pTrackCollision; // +64
+	void* pCollisionVertices; // +68
+	uint8_t _6C[0x8];
+	bool bIgnoreBackfaces; // +74
+	bool bGetClosestHit; // +75 returns first match if false
+
+	tLineOfSightIn() {
+		memset(this,0,sizeof(*this));
+		fMaxDistance = 100.0;
+		fMinDistance = 0.01;
+		bIgnoreBackfaces = true;
+		bGetClosestHit = true;
+	}
+};
+
+struct tLineOfSightOut {
+	float fHitNormal[3];
+	float fHitDistance;
+};
+
+static inline uintptr_t CheckLineOfSight_call = 0x4B30C0;
+#ifdef NYA_MATH_H
+bool __attribute__((naked)) __fastcall CheckLineOfSight(NyaVec3* vStart, tLineOfSightIn* prop, tCollisionRegion* aRegionLock, NyaVec3* vDir, tLineOfSightOut* out, uint32_t flags, void* a8) {
+#else
+bool __attribute__((naked)) __fastcall CheckLineOfSight(float* vStart, tLineOfSightIn* prop, tCollisionRegion* aRegionLock, float* vDir, tLineOfSightOut* out, uint32_t flags, void* a8) {
+#endif
+	__asm__ (
+		"push ecx\n\t"
+		"push edx\n\t"
+		"push ebx\n\t"
+		"push ebp\n\t"
+		"push esi\n\t"
+		"push edi\n\t"
+
+		"mov edi, edx\n\t" // prop
+
+		// TrackCollision ptr
+		"mov eax, 0x6C004C\n\t"
+		"mov eax, [eax]\n\t"
+		"mov edx, [eax+0x20]\n\t"
+
+		// stack params
+		"push dword ptr [esp+0x2C]\n\t"
+		"push dword ptr [esp+0x2C]\n\t"
+		"push dword ptr [esp+0x2C]\n\t"
+		"push dword ptr [esp+0x2C]\n\t"
+		"push dword ptr [esp+0x2C]\n\t"
+
+		"call %0\n\t"
+		"pop edi\n\t"
+		"pop esi\n\t"
+		"pop ebp\n\t"
+		"pop ebx\n\t"
+		"pop edx\n\t"
+		"pop ecx\n\t"
+		"ret 0x14\n\t"
+			:
+			:  "m" (CheckLineOfSight_call)
+	);
+}

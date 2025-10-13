@@ -263,6 +263,12 @@ public:
 	float mMatrix[4*4]; // +40
 	uint8_t _80[0x4C];
 	FO2String sName; // +CC
+
+#ifdef NYA_MATH_H
+	inline NyaMat4x4* GetMatrix() {
+		return (NyaMat4x4*)mMatrix;
+	}
+#endif
 };
 
 class Car {
@@ -305,7 +311,9 @@ public:
 	float fMass; // +29C
 	uint8_t _2A0[0xB0];
 	CarPerformance Performance; // +350
-	uint8_t _5B8[0xB58];
+	uint8_t _5B8[0xB28];
+	FO2Vector<Object*> aDummyObjects; // +10E0
+	uint8_t _10EC[0x24];
 	Body Body; // +1110
 	uint8_t _12A0[0x8];
 	float fGasPedal; // +12A8
@@ -315,9 +323,7 @@ public:
 	float fSteerAngle; // +12B8
 	uint8_t _12BC[0x54];
 	TireDynamics TireDynamics[8]; // +1310
-	uint8_t _1570[0x710];
-	FO2Vector<Object*> aDummyObjects; // +1C80
-	uint8_t _1C8C[0x248];
+	uint8_t _1570[0x964];
 	float fRagdollVelocity; // +1ED4
 	uint8_t _1ED8[0x28];
 	uint32_t nIsRagdolled; // +1F00
