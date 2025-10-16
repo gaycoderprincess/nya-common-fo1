@@ -301,7 +301,10 @@ public:
 #endif
 	uint8_t _FC[0x54];
 	float mMatrix[4*4]; // +150 used as ptr for collision checks
-	uint8_t _190[0xB0];
+	uint8_t _190[0x78];
+	float vCenter[3]; // +208
+	float vRadius[3]; // +214
+	uint8_t _220[0x20];
 	float qQuaternion[4]; // +240
 	uint8_t _250[0x10];
 	float vVelocity[3]; // +260
@@ -341,6 +344,12 @@ public:
 #ifdef NYA_MATH_H
 	inline NyaMat4x4* GetMatrix() {
 		return (NyaMat4x4*)mMatrix;
+	}
+	inline NyaVec3* GetCenter() {
+		return (NyaVec3*)vCenter;
+	}
+	inline NyaVec3* GetRadius() {
+		return (NyaVec3*)vRadius;
 	}
 	inline NyaVec3* GetVelocity() {
 		return (NyaVec3*)vVelocity;

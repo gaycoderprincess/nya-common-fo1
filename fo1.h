@@ -71,9 +71,9 @@ struct tLineOfSightOut {
 
 static inline uintptr_t CheckLineOfSight_call = 0x4B30C0;
 #ifdef NYA_MATH_H
-bool __attribute__((naked)) __fastcall CheckLineOfSight(NyaVec3* vStart, tLineOfSightIn* prop, tCollisionRegion* aRegionLock, NyaVec3* vDir, tLineOfSightOut* out, uint32_t flags, void* a8) {
+bool __attribute__((naked)) __fastcall CheckLineOfSight(const NyaVec3* vStart, tLineOfSightIn* prop, tCollisionRegion* aRegionLock, const NyaVec3* vDir, tLineOfSightOut* out, uint32_t flags, void* a8) {
 #else
-bool __attribute__((naked)) __fastcall CheckLineOfSight(float* vStart, tLineOfSightIn* prop, tCollisionRegion* aRegionLock, float* vDir, tLineOfSightOut* out, uint32_t flags, void* a8) {
+bool __attribute__((naked)) __fastcall CheckLineOfSight(const float* vStart, tLineOfSightIn* prop, tCollisionRegion* aRegionLock, const float* vDir, tLineOfSightOut* out, uint32_t flags, void* a8) {
 #endif
 	__asm__ (
 		"push ecx\n\t"
