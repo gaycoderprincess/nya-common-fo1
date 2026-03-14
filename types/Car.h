@@ -271,6 +271,12 @@ public:
 #endif
 };
 
+class Tire {
+public:
+	uint8_t _0[0x1E0];
+};
+static_assert(sizeof(Tire) == 0x1E0);
+
 class Car {
 public:
 	int aObjectsSmashed[10]; // +0
@@ -314,7 +320,9 @@ public:
 	float fMass; // +29C
 	uint8_t _2A0[0xB0];
 	CarPerformance Performance; // +350
-	uint8_t _5B8[0xB28];
+	uint8_t _5B8[0x18];
+	Tire Tires[4]; // +5D0
+	uint8_t _D50[0x390];
 	FO2Vector<Object*> aDummyObjects; // +10E0
 	uint8_t _10EC[0x24];
 	Body Body; // +1110
@@ -344,6 +352,9 @@ public:
 #ifdef NYA_MATH_H
 	inline NyaMat4x4* GetMatrix() {
 		return (NyaMat4x4*)mMatrix;
+	}
+	inline NyaVec4* GetQuaternion() {
+		return (NyaVec4*)qQuaternion;
 	}
 	inline NyaVec3* GetCenter() {
 		return (NyaVec3*)vCenter;
@@ -455,6 +466,8 @@ public:
 	}
 };
 static_assert(sizeof(Car) == 0x425C);
+static_assert(offsetof(Car, Tires) == 0x5D0);
+static_assert(offsetof(Car, TireDynamics) == 0x1310);
 
 auto fBonusTypeMayhem = (float*)0x6BD990;
 auto fBonusTypePrice = (float*)0x6BD968;
